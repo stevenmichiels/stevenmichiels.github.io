@@ -1,0 +1,38 @@
+title: Gamma dashboard
+logo: /assets/img/gamma.png
+#description: text below image
+show_downloads: true
+#remote_theme: pages-themes/hacker@v0.2.0
+#remote_theme: "Paramdigma/hydryne-jekyll-theme"
+#remote_theme: andrewbanchich/forty-jekyll-theme
+#remote_theme: jeromelachaud/freelancer-theme
+#remote_theme: dieghernan/chulapa
+#remote_theme: daattali/beautiful-jekyll
+remote_theme: stevenmichiels/beautiful-jekyll
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
+
+
+# avatar: "/img/avatar-icon.png"
+
+
+# List of links in the navigation bar
+navbar-links:
+  Home: ""
+  Projects: "projects"
+  About Me: "aboutme"
+  Presentations: "blog"
+
+
+# --- Footer options --- #
+author:
+  name: Steven Michiels
+  email: "steven.michiels2@gmail.com"
+  github: stevenmichiels
+  twitter: Ursus2021
+
+# Select which links to show in the footer
+footer-links-active:
+  email: true
+  twitter: true
+  github: true
