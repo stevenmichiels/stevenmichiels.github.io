@@ -15,7 +15,7 @@ plugins:
 
 # avatar: "/img/avatar-icon.png"
 
-cover-img: "/assets/img/laos.jpeg"
+cover-img: /assets/img/gamma.png
 
 # List of links in the navigation bar
 navbar-links:
