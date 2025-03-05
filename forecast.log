@@ -1,0 +1,483 @@
+2025-02-26 13:37:01,009 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:37:01,069 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:37:01,070 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:37:01,078 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:37:01,079 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:37:01,080 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:37:01,081 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:37:01,082 - XForecastIndicator - INFO - Using combined breakout signals: min=-13.99, max=14.25
+2025-02-26 13:37:01,082 - XForecastIndicator - INFO - Final forecast: min=-17.79, max=17.92
+2025-02-26 13:41:14,055 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:41:14,106 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:41:14,106 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:41:14,113 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:41:14,114 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:41:14,115 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:41:14,116 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:41:14,116 - XForecastIndicator - INFO - Final forecast: min=-21.60, max=21.60
+2025-02-26 13:42:16,897 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:42:16,948 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:42:16,949 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:42:16,956 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:42:16,957 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:42:16,958 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:42:16,959 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:42:16,960 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:42:16,960 - XForecastIndicator - INFO - Final forecast: min=-20.00, max=20.00
+2025-02-26 13:42:27,126 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:42:27,127 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:42:27,134 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:42:27,135 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:42:27,136 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:42:27,137 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:42:27,138 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:42:27,139 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:42:27,139 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:45:37,525 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:45:37,577 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:45:37,578 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:45:37,585 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:45:37,586 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:45:37,587 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:45:37,588 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:45:37,589 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:45:37,589 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:45:37,590 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:47:22,057 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:47:22,109 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:47:22,110 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:47:22,117 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:47:22,118 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:47:22,119 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:47:22,119 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:47:22,120 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:47:22,121 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:47:22,122 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:48:17,543 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:48:17,597 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:48:17,597 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:48:17,605 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:48:17,606 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:48:17,607 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:48:17,608 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:48:17,609 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:48:17,609 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:48:17,610 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:51:30,088 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:51:30,141 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:51:30,141 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:51:30,149 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:51:30,150 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:51:30,151 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:51:30,152 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:51:30,153 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:51:30,153 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:51:30,154 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:52:32,698 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:52:32,750 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:52:32,750 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:52:32,757 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:52:32,758 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:52:32,760 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:52:32,760 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:52:32,761 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:52:32,762 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:52:32,762 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:52:53,911 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:52:53,912 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:52:53,919 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:52:53,920 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:52:53,921 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:52:53,924 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:52:53,926 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:52:53,927 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:52:53,927 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:53:02,829 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:53:02,884 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:53:02,884 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:53:02,892 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:53:02,893 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:53:02,894 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:53:02,895 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:53:02,896 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:53:02,897 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:53:02,897 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:55:39,288 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:55:39,342 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:55:39,342 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:55:39,349 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:55:39,350 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:55:39,351 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:55:39,352 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:55:39,353 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:55:39,354 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:55:39,354 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 13:57:59,204 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 13:57:59,255 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 13:57:59,255 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 13:57:59,262 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 13:57:59,263 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 13:57:59,264 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 13:57:59,265 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 13:57:59,265 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 13:57:59,266 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 13:57:59,267 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:00:56,646 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 14:00:56,783 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:00:56,784 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:00:56,802 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:00:56,805 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:00:56,807 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:00:56,808 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:00:56,810 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:00:56,811 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:00:56,812 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:05:38,140 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 14:05:38,278 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:05:38,279 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:05:38,303 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:05:38,306 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:05:38,310 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:05:38,312 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:05:38,314 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:05:38,316 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:05:38,318 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:07:36,509 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 14:07:36,784 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:07:36,785 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:07:36,809 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:07:36,812 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:07:36,816 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:07:36,818 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:07:36,820 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:07:36,823 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:07:36,825 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:33:36,333 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 14:33:36,389 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:33:36,393 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:33:36,404 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:33:36,405 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:33:36,406 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:33:36,407 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:33:36,408 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:33:36,409 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:33:36,410 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:34:39,662 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 14:34:39,713 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:34:39,713 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:34:39,721 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:34:39,722 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:34:39,723 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:34:39,723 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:34:39,724 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:34:39,725 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:34:39,726 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:36:40,084 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:36:40,085 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:36:40,092 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:36:40,094 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:36:40,095 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:36:40,095 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:36:40,097 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:36:40,098 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:36:40,098 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:38:43,344 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 14:38:43,410 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:38:43,410 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:38:43,418 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:38:43,420 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:38:43,421 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:38:43,422 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:38:43,423 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:38:43,424 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:38:43,424 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:41:13,369 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:41:13,370 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:41:13,377 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:41:13,378 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:41:13,379 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:41:13,380 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:41:13,382 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:41:13,382 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:41:13,383 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:43:00,097 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:43:00,097 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:43:00,104 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:43:00,106 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:43:00,107 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:43:00,107 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:43:00,108 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:43:00,109 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:43:00,110 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:44:03,373 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:44:03,374 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:44:03,381 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:44:03,382 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:44:03,383 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:44:03,384 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:44:03,385 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:44:03,386 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:44:03,386 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:45:53,276 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:45:53,276 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:45:53,284 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:45:53,285 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:45:53,286 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:45:53,287 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:45:53,288 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:45:53,289 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:45:53,289 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:47:36,479 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:47:36,480 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:47:36,487 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:47:36,488 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:47:36,489 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:47:36,489 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:47:36,490 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:47:36,491 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:47:36,492 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:50:31,624 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 14:50:31,676 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:50:31,676 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:50:31,683 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:50:31,684 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:50:31,685 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:50:31,685 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:50:31,687 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:50:31,687 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:50:31,688 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:53:47,090 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:53:47,090 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:53:47,097 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:53:47,098 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:53:47,099 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:53:47,100 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:53:47,101 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:53:47,102 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:53:47,103 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 14:56:58,127 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 14:56:58,127 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 14:56:58,134 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 14:56:58,136 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 14:56:58,136 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 14:56:58,137 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 14:56:58,138 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 14:56:58,139 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 14:56:58,139 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 15:00:06,780 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 15:00:06,781 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 15:00:06,788 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 15:00:06,789 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 15:00:06,790 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 15:00:06,791 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 15:00:06,792 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 15:00:06,793 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 15:00:06,794 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 15:04:20,739 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 15:04:20,792 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 15:04:20,792 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 15:04:20,799 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 15:04:20,800 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 15:04:20,801 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 15:04:20,802 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 15:04:20,803 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 15:04:20,803 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 15:04:20,804 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 15:06:47,409 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 15:06:47,461 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 15:06:47,461 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 15:06:47,468 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 15:06:47,469 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 15:06:47,470 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 15:06:47,471 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 15:06:47,472 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 15:06:47,473 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 15:06:47,473 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 15:08:40,481 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 15:08:40,481 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 15:08:40,488 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 15:08:40,489 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 15:08:40,490 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 15:08:40,491 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 15:08:40,492 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 15:08:40,492 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 15:08:40,493 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 16:57:25,322 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 16:57:25,374 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 16:57:25,374 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 16:57:25,380 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 16:57:25,381 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 16:57:25,382 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 16:57:25,383 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 16:57:25,384 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 16:57:25,384 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.39, max=15.67
+2025-02-26 16:57:25,385 - XForecastIndicator - INFO - Final forecast: min=-17.69, max=17.84
+2025-02-26 16:59:00,702 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 16:59:00,755 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 16:59:00,756 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 16:59:00,762 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 16:59:00,763 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 16:59:00,764 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 16:59:00,765 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 16:59:00,766 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 16:59:00,767 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 16:59:00,768 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:03:14,123 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 17:03:14,177 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:03:14,178 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:03:14,183 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:03:14,184 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:03:14,185 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:03:14,186 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:03:14,187 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:03:14,187 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:03:14,188 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:05:27,294 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 17:05:27,347 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:05:27,347 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:05:27,353 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:05:27,354 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:05:27,355 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:05:27,356 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:05:27,357 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:05:27,357 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:05:27,358 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:10:34,095 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:10:34,095 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:10:34,100 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:10:34,102 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:10:34,102 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:10:34,103 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:10:34,104 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:10:34,104 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:10:34,105 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:12:39,961 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:12:39,962 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:12:39,967 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:12:39,968 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:12:39,969 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:12:39,970 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:12:39,971 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:12:39,972 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:12:39,972 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:14:02,688 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 17:14:02,779 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:14:02,779 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:14:02,784 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:14:02,785 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:14:02,786 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:14:02,787 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:14:02,788 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:14:02,788 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:14:02,789 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:15:52,719 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 17:15:52,772 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:15:52,773 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:15:52,778 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:15:52,779 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:15:52,780 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:15:52,781 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:15:52,782 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:15:52,782 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:15:52,783 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:18:14,214 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 17:18:14,267 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:18:14,267 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:18:14,273 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:18:14,274 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:18:14,275 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:18:14,275 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:18:14,277 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:18:14,277 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:18:14,278 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:31:07,709 - XForecastIndicator - INFO - Logging initialized successfully
+2025-02-26 17:31:07,762 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:31:07,763 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:31:07,768 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:31:07,769 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:31:07,770 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:31:07,771 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:31:07,772 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:31:07,772 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:31:07,773 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:31:07,774 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:31:07,774 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:31:07,779 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:31:07,780 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:31:07,781 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:31:07,781 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:31:07,782 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:31:07,783 - XForecastIndicator - INFO - Using combined breakout signals: min=-13.88, max=15.44
+2025-02-26 17:31:07,783 - XForecastIndicator - INFO - Final forecast: min=-16.94, max=17.72
+2025-02-26 17:31:19,909 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:31:19,909 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:31:19,915 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:31:19,916 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:31:19,917 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:31:19,917 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:31:19,918 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:31:19,919 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:31:19,920 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:31:19,921 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:31:19,921 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:31:19,926 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:31:19,927 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:31:19,928 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:31:19,928 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:31:19,929 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:31:19,930 - XForecastIndicator - INFO - Using combined breakout signals: min=-13.88, max=15.44
+2025-02-26 17:31:19,930 - XForecastIndicator - INFO - Final forecast: min=-16.94, max=17.72
+2025-02-26 17:31:26,028 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:31:26,029 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:31:26,034 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:31:26,035 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:31:26,036 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:31:26,037 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:31:26,038 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:31:26,039 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:31:26,039 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:31:26,041 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:31:26,041 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:31:26,046 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:31:26,047 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:31:26,048 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:31:26,048 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:31:26,049 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:31:26,050 - XForecastIndicator - INFO - Using combined breakout signals: min=-13.88, max=15.44
+2025-02-26 17:31:26,051 - XForecastIndicator - INFO - Final forecast: min=-16.94, max=17.72
+2025-02-26 17:31:26,052 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:31:26,053 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:31:26,058 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:31:26,059 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:31:26,060 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:31:26,061 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:31:26,062 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:31:26,063 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.91, max=15.90
+2025-02-26 17:31:26,064 - XForecastIndicator - INFO - Final forecast: min=-17.93, max=17.95
+2025-02-26 17:32:11,480 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:32:11,481 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:32:11,486 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:32:11,487 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:32:11,488 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:32:11,489 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:32:11,490 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:32:11,490 - XForecastIndicator - INFO - Using combined breakout signals: min=-14.78, max=15.67
+2025-02-26 17:32:11,491 - XForecastIndicator - INFO - Final forecast: min=-17.39, max=17.84
+2025-02-26 17:32:11,492 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:32:11,493 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:32:11,497 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:32:11,498 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:32:11,499 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:32:11,500 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:32:11,501 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:32:11,502 - XForecastIndicator - INFO - Using combined breakout signals: min=-13.88, max=15.44
+2025-02-26 17:32:11,502 - XForecastIndicator - INFO - Final forecast: min=-16.94, max=17.72
+2025-02-26 17:32:11,503 - XForecastIndicator - INFO - Initializing ForecastIndicator with base_period=8, include=16-64-256
+2025-02-26 17:32:11,504 - XForecastIndicator - INFO - Starting forecast calculation
+2025-02-26 17:32:11,509 - XForecastIndicator - INFO - EWMAC signal 1: scaled=5.95, min=-20.00, max=20.00
+2025-02-26 17:32:11,510 - XForecastIndicator - INFO - EWMAC signal 2: scaled=4.10, min=-20.00, max=20.00
+2025-02-26 17:32:11,511 - XForecastIndicator - INFO - EWMAC signal 3: scaled=2.79, min=-20.00, max=20.00
+2025-02-26 17:32:11,512 - XForecastIndicator - INFO - EWMAC FDM: 1.08
+2025-02-26 17:32:11,513 - XForecastIndicator - INFO - Combined forecast: min=-20.00, max=20.00
+2025-02-26 17:32:11,514 - XForecastIndicator - INFO - Using combined breakout signals: min=-15.91, max=15.90
+2025-02-26 17:32:11,514 - XForecastIndicator - INFO - Final forecast: min=-17.93, max=17.95
