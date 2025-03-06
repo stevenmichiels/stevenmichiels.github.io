@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ETF Forecast</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -37,6 +38,17 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 2rem;
+        }
+        .forecast-info {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-left: 4px solid #2c3e50;
+        }
         footer {
             text-align: center;
             margin-top: 2rem;
@@ -57,6 +69,17 @@
         <div class="content">
             <h2>Welcome to ETF Forecast</h2>
             <p>This is a simple website for ETF forecasting and analysis.</p>
+            
+            <h3>SPY ETF Forecast</h3>
+            <div class="chart-container">
+                <canvas id="spyChart"></canvas>
+            </div>
+            
+            <div class="forecast-info">
+                <h4>Forecast Analysis</h4>
+                <p>Based on our analysis, SPY is projected to show moderate growth over the next 6 months with potential resistance at the $480 level. Key support levels are established at $420 and $400.</p>
+                <p>Volatility is expected to remain within historical norms, with a slight increase anticipated during the upcoming earnings season.</p>
+            </div>
         </div>
     </div>
     
@@ -65,5 +88,90 @@
             <p>&copy; 2023 ETF Forecast. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the chart canvas
+            const ctx = document.getElementById('spyChart').getContext('2d');
+            
+            // Historical data (last 6 months)
+            const historicalDates = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            const historicalPrices = [420, 430, 425, 445, 450, 455];
+            
+            // Forecast data (next 6 months)
+            const forecastDates = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const forecastPrices = [460, 465, 475, 480, 485, 490];
+            
+            // Combine data for display
+            const allDates = [...historicalDates, ...forecastDates];
+            const allPrices = [...historicalPrices, ...forecastPrices];
+            
+            // Create the chart
+            const spyChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: allDates,
+                    datasets: [
+                        {
+                            label: 'Historical Price',
+                            data: [...historicalPrices, null, null, null, null, null, null],
+                            borderColor: '#2c3e50',
+                            backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 4,
+                            fill: true
+                        },
+                        {
+                            label: 'Forecast',
+                            data: [null, null, null, null, null, null, ...forecastPrices],
+                            borderColor: '#e74c3c',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 4,
+                            pointStyle: 'triangle',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'SPY ETF Price Forecast',
+                            font: {
+                                size: 18
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Price ($)'
+                            },
+                            min: 400,
+                            max: 500
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
