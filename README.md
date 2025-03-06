@@ -1,13 +1,29 @@
+# ETF Forecast
 
+A simple website for ETF forecasting and analysis.
 
+## Description
 
+This is a basic website template for an ETF Forecast service. The site currently includes:
 
+- A clean, responsive layout
+- Simple styling with CSS
+- A header with the site title
+- A content section
+- A footer
 
+## Getting Started
 
+To view the website, simply open the `index.html` file in any web browser.
 
+## Future Enhancements
 
+Potential future enhancements could include:
+- Interactive ETF charts and graphs
+- Market data integration
+- User accounts for personalized forecasts
+- Mobile app integration
 
+## License
 
-
-
-Note: All sensitive data files are gitignored for privacy.4. Run `python update_forecast.py` to generate the forecast3. Create a .env file with `MARKET_DATA_PATH=your/data/path`2. Copy your Xdaily.csv file to that location1. Create a private directory for market data outside the repoTo run the market forecast:## Market Forecast Setup# ...existing code...
+This project is available for personal and commercial use.
