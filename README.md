@@ -8,21 +8,19 @@ This is a basic website template for an ETF Forecast service. The site currently
 
 - A clean, responsive layout
 - Simple styling with CSS
-- A header with the site title
-- A content section
-- A footer
+- Interactive ETF forecast visualization using Plotly.js
+- Performance metrics for strategy vs buy-and-hold
 
 ## Getting Started
 
 To view the website, simply open the `index.html` file in any web browser.
 
-## Future Enhancements
+## Features
 
-Potential future enhancements could include:
-- Interactive ETF charts and graphs
-- Market data integration
-- User accounts for personalized forecasts
-- Mobile app integration
+- Historical and forecast price visualization
+- Strategy performance comparison
+- Drawdown analysis
+- Position signal indicators
 
 ## License
 

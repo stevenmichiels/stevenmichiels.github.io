@@ -1,17 +1,1 @@
-title: ETF Forecast
-description: A simple website for ETF forecasting and analysis
-theme: jekyll-theme-cayman
-
-# GitHub Pages settings
-markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-
-# Exclude files from processing
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
-  - README.md 
+# This file is no longer used as we've reverted to a simple HTML website without Jekyll. 
