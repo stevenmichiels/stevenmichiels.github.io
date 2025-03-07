@@ -24,8 +24,9 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     # Extract instrument prices
     prices = df[instrument]
     
-    # Create output filename for JSON
-    output_path = f'/Users/stevenmichiels/Repos/{subfolder}/forecast_data.json'
+    # Create output filename for JSON - using relative path
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_path = os.path.join(script_dir, 'forecast_data.json')
 
     # Create a forecast indicator and calculate forecasts
     indicator = ForecastIndicator(base_period=8, include='16-64-256')
@@ -95,8 +96,13 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     }
 
     # Save to JSON file
-    with open(output_path, 'w') as f:
-        json.dump(forecast_data, f)
+    try:
+        with open(output_path, 'w') as f:
+            json.dump(forecast_data, f)
+        print(f"\n✅ Forecast data has been saved as '{output_path}'")
+    except Exception as e:
+        print(f"\n❌ Error saving forecast data: {str(e)}")
+        return
 
     # Print performance statistics
     print(f"\nPerformance Summary for {instrument}:")
@@ -107,7 +113,6 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     print(f"Number of Trades: {positions.diff().abs().sum() / 2:.0f}")
     print(f"Max Drawdown Strategy: {strategy_dd.min():.1f}%")
     print(f"Max Drawdown Buy&Hold: {bh_dd.min():.1f}%")
-    print(f"\n✅ Forecast data has been saved as '{output_path}'")
 
 if __name__ == "__main__":
     try:
