@@ -152,7 +152,7 @@ def update_tv_with_yf(tv, tv_ticker, yf_ticker="^GSPC", overwrite_=True):
 tv_SPX_init = wrangle_tradingview('SPX','SP','SPX')
 tv_SPX = update_tv_with_yf(tv_SPX_init, 'SPX')
 tv_NDX_init = wrangle_tradingview('NDX','NASDAQ','NDX')
-tv_NDX = update_tv_with_yf(tv_NDX_init, 'NDX')
+tv_NDX = update_tv_with_yf(tv_NDX_init, 'NDX', yf_ticker="^NDX")
 
 tv_CL = wrangle_tradingview('USOIL','TVC','CL')
 tv_GC = wrangle_tradingview('GC','COMEX','GC', fut_contract_=1)
