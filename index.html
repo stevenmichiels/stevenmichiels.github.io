@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETF Forecast</title>
-    <!-- Include Plotly.js -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Trend Forecast</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -41,7 +39,7 @@
         }
         .forecast-container {
             width: 100%;
-            height: 800px;
+            height: 1000px;
             margin-top: 2rem;
         }
         footer {
@@ -56,348 +54,26 @@
 <body>
     <header>
         <div class="container">
-            <h1>ETF Forecast</h1>
+            <h1>Trend Forecast</h1>
         </div>
     </header>
     
     <div class="container">
         <div class="content">
-            <h2>Welcome to ETF Forecast</h2>
+            <h2>Welcome to Trend Forecast</h2>
             <p>This is a simple website for ETF forecasting and analysis.</p>
             
             <h3>SPY ETF Forecast</h3>
-            <div id="forecastPlot" class="forecast-container"></div>
+            <div class="forecast-container">
+                <iframe src="SPX_strategy_performance.html" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
         </div>
     </div>
     
     <footer>
         <div class="container">
-            <p>&copy; 2023 ETF Forecast. All rights reserved.</p>
+            <p>&copy; 2023 Trend Forecast. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Generate dates for the past 5 years and 1 year into the future
-            function generateDates(startYear, numYears) {
-                let dates = [];
-                let currentDate = new Date(startYear, 0, 1);
-                
-                for (let i = 0; i < numYears * 12; i++) {
-                    dates.push(new Date(currentDate));
-                    currentDate.setMonth(currentDate.getMonth() + 1);
-                }
-                
-                return dates;
-            }
-            
-            // Generate historical dates (5 years of past data)
-            const currentYear = new Date().getFullYear();
-            const historicalDates = generateDates(currentYear - 5, 5);
-            
-            // Generate forecast dates (1 year into the future)
-            const forecastDates = generateDates(currentYear, 1);
-            
-            // Generate historical price data with some realistic SPY movement
-            function generateHistoricalPrices(startPrice, numPoints, volatility) {
-                let prices = [startPrice];
-                for (let i = 1; i < numPoints; i++) {
-                    // Random walk with drift
-                    const change = (Math.random() - 0.45) * volatility; // Slight upward bias
-                    const newPrice = prices[i-1] * (1 + change);
-                    prices.push(newPrice);
-                }
-                return prices;
-            }
-            
-            // Generate forecast price data with a trend
-            function generateForecastPrices(lastHistoricalPrice, numPoints, trend, volatility) {
-                let prices = [lastHistoricalPrice];
-                for (let i = 1; i < numPoints; i++) {
-                    // Random walk with specified trend
-                    const change = trend + (Math.random() - 0.5) * volatility;
-                    const newPrice = prices[i-1] * (1 + change);
-                    prices.push(newPrice);
-                }
-                return prices;
-            }
-            
-            // Generate price data
-            const startPrice = 350; // Starting price for SPY 5 years ago
-            const historicalPrices = generateHistoricalPrices(startPrice, historicalDates.length, 0.03);
-            const forecastPrices = generateForecastPrices(
-                historicalPrices[historicalPrices.length - 1], 
-                forecastDates.length, 
-                0.005, // Slight upward trend
-                0.02  // Lower volatility for forecast
-            );
-            
-            // Combine historical and forecast data
-            const allDates = [...historicalDates, ...forecastDates];
-            const allPrices = [...historicalPrices, ...forecastPrices];
-            
-            // Calculate forecast values (between -20 and +20)
-            function calculateForecast(prices) {
-                // Calculate EWMA components
-                const basePeriod = 8;
-                const period1 = basePeriod;
-                const period2 = basePeriod * 2;
-                const period3 = basePeriod * 4;
-                
-                // Calculate volatility for normalization
-                function calculateVolatility(prices, span=32) {
-                    let returns = [];
-                    for (let i = 1; i < prices.length; i++) {
-                        returns.push((prices[i] / prices[i-1] - 1) * 100);
-                    }
-                    
-                    // Pad the first value
-                    returns.unshift(0);
-                    
-                    // Calculate EWMA of returns
-                    const lambda = 2 / (span + 1);
-                    let ewma = [returns[0]];
-                    for (let i = 1; i < returns.length; i++) {
-                        ewma.push(lambda * returns[i] + (1 - lambda) * ewma[i-1]);
-                    }
-                    
-                    // Calculate variance
-                    let ewvar = [0];
-                    for (let i = 1; i < returns.length; i++) {
-                        const diff = returns[i] - ewma[i];
-                        ewvar.push(lambda * diff * diff + (1 - lambda) * ewvar[i-1]);
-                    }
-                    
-                    // Calculate daily volatility
-                    const sigmaDay = ewvar.map(v => Math.sqrt(v));
-                    
-                    // Annualize
-                    const sigmaAnn = sigmaDay.map(s => 16 * s);
-                    
-                    // Convert to price volatility
-                    const sigmaPrice = [];
-                    for (let i = 0; i < prices.length; i++) {
-                        sigmaPrice.push(sigmaAnn[i] / 16 / 100 * prices[i]);
-                    }
-                    
-                    return sigmaPrice;
-                }
-                
-                // Calculate EWMA
-                function calculateEWMA(prices, span) {
-                    const alpha = 2 / (span + 1);
-                    let ewma = [prices[0]];
-                    for (let i = 1; i < prices.length; i++) {
-                        ewma.push(alpha * prices[i] + (1 - alpha) * ewma[i-1]);
-                    }
-                    return ewma;
-                }
-                
-                // Calculate EWMAC (EWMA Crossover)
-                function calculateEWMAC(prices, fastSpan, slowSpan) {
-                    const fastEWMA = calculateEWMA(prices, fastSpan);
-                    const slowEWMA = calculateEWMA(prices, slowSpan);
-                    
-                    // Calculate difference
-                    const ewmac = [];
-                    for (let i = 0; i < prices.length; i++) {
-                        ewmac.push(fastEWMA[i] - slowEWMA[i]);
-                    }
-                    
-                    return ewmac;
-                }
-                
-                // Calculate volatility
-                const volatility = calculateVolatility(prices);
-                
-                // Calculate EWMAC components
-                const ewmac16 = calculateEWMAC(prices, period1, 4 * period1);
-                const ewmac32 = calculateEWMAC(prices, period2, 4 * period2);
-                const ewmac64 = calculateEWMAC(prices, period3, 4 * period3);
-                
-                // Scale factors
-                const scaleFactor16 = 5.95;
-                const scaleFactor32 = 4.1;
-                const scaleFactor64 = 2.79;
-                
-                // Normalize and scale
-                const forecast16 = [];
-                const forecast32 = [];
-                const forecast64 = [];
-                
-                for (let i = 0; i < prices.length; i++) {
-                    // Avoid division by zero
-                    const vol = volatility[i] > 0 ? volatility[i] : 1;
-                    
-                    // Normalize by volatility
-                    let norm16 = ewmac16[i] / vol;
-                    let norm32 = ewmac32[i] / vol;
-                    let norm64 = ewmac64[i] / vol;
-                    
-                    // Scale
-                    let scaled16 = norm16 * scaleFactor16;
-                    let scaled32 = norm32 * scaleFactor32;
-                    let scaled64 = norm64 * scaleFactor64;
-                    
-                    // Cap at +/- 20
-                    forecast16.push(Math.max(-20, Math.min(20, scaled16)));
-                    forecast32.push(Math.max(-20, Math.min(20, scaled32)));
-                    forecast64.push(Math.max(-20, Math.min(20, scaled64)));
-                }
-                
-                // Combine forecasts with equal weights
-                const combinedForecast = [];
-                for (let i = 0; i < prices.length; i++) {
-                    combinedForecast.push((forecast16[i] + forecast32[i] + forecast64[i]) / 3);
-                }
-                
-                return combinedForecast;
-            }
-            
-            // Calculate the forecast values
-            const forecastValues = calculateForecast(allPrices);
-            
-            // Create the subplots
-            const trace1 = {
-                x: allDates,
-                y: allPrices,
-                type: 'scatter',
-                mode: 'lines',
-                name: 'SPY Price',
-                line: {
-                    color: 'blue'
-                },
-                yaxis: 'y'
-            };
-            
-            const trace2 = {
-                x: allDates,
-                y: forecastValues,
-                type: 'scatter',
-                mode: 'lines',
-                name: 'Forecast (-20 to +20)',
-                line: {
-                    color: 'red'
-                },
-                yaxis: 'y2'
-            };
-            
-            // Create layout
-            const layout = {
-                title: {
-                    text: 'SPY Price and Forecast Signal',
-                    font: {
-                        size: 16
-                    }
-                },
-                grid: {
-                    rows: 2,
-                    columns: 1,
-                    pattern: 'independent',
-                    roworder: 'top to bottom'
-                },
-                height: 800,
-                showlegend: true,
-                legend: {
-                    orientation: 'h',
-                    y: 1.1
-                },
-                yaxis: {
-                    title: 'Price ($)',
-                    domain: [0.55, 1]
-                },
-                yaxis2: {
-                    title: 'Forecast Signal',
-                    domain: [0, 0.45],
-                    range: [-22, 22],
-                    zeroline: true,
-                    zerolinecolor: 'gray',
-                    zerolinewidth: 1,
-                    tickvals: [-20, -10, 0, 10, 20],
-                    gridcolor: 'lightgray'
-                }
-            };
-            
-            // Add horizontal lines at -20, 0, and 20 for the forecast
-            const shapes = [
-                {
-                    type: 'line',
-                    x0: allDates[0],
-                    y0: 20,
-                    x1: allDates[allDates.length - 1],
-                    y1: 20,
-                    yref: 'y2',
-                    line: {
-                        color: 'gray',
-                        width: 1,
-                        dash: 'dash'
-                    }
-                },
-                {
-                    type: 'line',
-                    x0: allDates[0],
-                    y0: -20,
-                    x1: allDates[allDates.length - 1],
-                    y1: -20,
-                    yref: 'y2',
-                    line: {
-                        color: 'gray',
-                        width: 1,
-                        dash: 'dash'
-                    }
-                },
-                {
-                    type: 'line',
-                    x0: allDates[0],
-                    y0: 0,
-                    x1: allDates[allDates.length - 1],
-                    y1: 0,
-                    yref: 'y2',
-                    line: {
-                        color: 'gray',
-                        width: 1
-                    }
-                }
-            ];
-            
-            // Add vertical line to separate historical from forecast data
-            shapes.push({
-                type: 'line',
-                x0: historicalDates[historicalDates.length - 1],
-                y0: 0,
-                x1: historicalDates[historicalDates.length - 1],
-                y1: 1,
-                yref: 'paper',
-                line: {
-                    color: 'black',
-                    width: 2,
-                    dash: 'dash'
-                }
-            });
-            
-            layout.shapes = shapes;
-            
-            // Create the plot
-            Plotly.newPlot('forecastPlot', [trace1, trace2], layout);
-            
-            // Add annotation for forecast start
-            const forecastAnnotation = {
-                x: historicalDates[historicalDates.length - 1],
-                y: forecastValues[historicalDates.length - 1],
-                text: 'Forecast Start',
-                showarrow: true,
-                arrowhead: 2,
-                arrowsize: 1,
-                arrowwidth: 2,
-                ax: -40,
-                ay: -40,
-                yref: 'y2'
-            };
-            
-            Plotly.relayout('forecastPlot', {
-                annotations: [forecastAnnotation]
-            });
-        });
-    </script>
 </body>
 </html>
