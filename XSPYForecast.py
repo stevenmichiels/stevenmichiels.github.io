@@ -9,7 +9,8 @@ import json
 
 def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.github.io'):
     # Read the CSV file
-    df = pd.read_csv('/Users/stevenmichiels/Repos/'+subfolder+'/Xdaily.csv')
+    base_path = f'/Users/stevenmichiels/Repos/{subfolder}'
+    df = pd.read_csv(os.path.join(base_path, 'Xdaily.csv'))
     
     # Verify if instrument exists in the DataFrame
     if instrument not in df.columns:
@@ -24,9 +25,9 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     # Extract instrument prices
     prices = df[instrument]
     
-    # Create output filename for JSON - using relative path
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    output_path = os.path.join(script_dir, 'forecast_data.json')
+    # Create output filename for JSON - save in the GitHub Pages repository
+    output_path = os.path.join(base_path, 'forecast_data.json')
+    print(f"Will save forecast data to: {output_path}")
 
     # Create a forecast indicator and calculate forecasts
     indicator = ForecastIndicator(base_period=8, include='16-64-256')
