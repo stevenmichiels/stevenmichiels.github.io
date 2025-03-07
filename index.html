@@ -110,7 +110,8 @@
                         mode: 'lines',
                         name: 'Forecast Signal',
                         line: { color: 'blue' },
-                        yaxis: 'y'
+                        yaxis: 'y',
+                        hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
                     },
                     {
                         x: data.dates,
@@ -119,7 +120,8 @@
                         mode: 'lines',
                         name: 'Price',
                         line: { color: 'gray' },
-                        yaxis: 'y2'
+                        yaxis: 'y2',
+                        hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
                     }
                 ];
 
