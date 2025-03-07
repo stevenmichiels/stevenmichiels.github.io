@@ -7,6 +7,17 @@ from XForecastIndicator import ForecastIndicator, plot_forecast
 import argparse
 import json
 
+# Custom JSON encoder to handle NaN values
+class NpEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj) if not np.isnan(obj) else None
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super(NpEncoder, self).default(obj)
+
 def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.github.io'):
     # Read the CSV file
     base_path = f'/Users/stevenmichiels/Repos/{subfolder}'
@@ -73,16 +84,20 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     strategy_sharpe = strategy_cagr / strategy_vol
     bh_sharpe = bh_cagr / bh_vol
 
+    # Convert numpy arrays to lists and handle NaN values
+    def clean_series(series):
+        return [float(x) if not np.isnan(x) else None for x in series]
+
     # Prepare data for JSON export
     forecast_data = {
         'dates': df.index.strftime('%Y-%m-%d').tolist(),
-        'prices': prices.tolist(),
-        'forecasts': forecasts.tolist(),
-        'cumulative_returns': cumulative_returns.tolist(),
-        'buy_hold_returns': buy_hold_returns.tolist(),
-        'strategy_drawdown': strategy_dd.tolist(),
-        'bh_drawdown': bh_dd.tolist(),
-        'positions': positions.tolist(),
+        'prices': clean_series(prices),
+        'forecasts': clean_series(forecasts),
+        'cumulative_returns': clean_series(cumulative_returns),
+        'buy_hold_returns': clean_series(buy_hold_returns),
+        'strategy_drawdown': clean_series(strategy_dd),
+        'bh_drawdown': clean_series(bh_dd),
+        'positions': clean_series(positions),
         'strategy_final_return': f"{cumulative_returns.iloc[-1]:.1f}",
         'bh_final_return': f"{buy_hold_returns.iloc[-1]:.1f}",
         'avg_strategy_dd': f"{strategy_dd.mean():.1f}",
@@ -99,7 +114,7 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     # Save to JSON file
     try:
         with open(output_path, 'w') as f:
-            json.dump(forecast_data, f)
+            json.dump(forecast_data, f, cls=NpEncoder)
         print(f"\n✅ Forecast data has been saved as '{output_path}'")
     except Exception as e:
         print(f"\n❌ Error saving forecast data: {str(e)}")
