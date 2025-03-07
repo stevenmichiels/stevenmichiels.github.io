@@ -10,6 +10,7 @@ A web-based visualization tool for ETF trend forecasting analysis.
 - Visual indicators for bearish periods (red background when forecast < 0)
 - Price chart with linear scale and $1000 interval ticks
 - Responsive design that works on desktop and mobile devices
+- Custom favicon for the website
 
 ## Technical Details
 
@@ -23,6 +24,7 @@ A web-based visualization tool for ETF trend forecasting analysis.
 1. Make sure the XSPYForecast.py script has been run to generate forecast_data.json
 2. Host the files on a web server or GitHub Pages
 3. Access index.html in a web browser
+4. Add a favicon by placing `favicon.ico` in the root directory
 
 ## Data Format
 
