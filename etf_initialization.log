@@ -230,3 +230,8 @@
 2025-03-07 19:57:44,061 - INFO - Initializing ETF data
 2025-03-07 19:58:06,666 - WARNING - Connection pool is full, discarding connection: query2.finance.yahoo.com. Connection pool size: 10
 2025-03-07 19:58:06,691 - WARNING - Connection pool is full, discarding connection: query2.finance.yahoo.com. Connection pool size: 10
+2025-03-07 20:30:16,263 - ERROR - error while signin
+2025-03-07 20:30:16,265 - WARNING - you are using nologin method, data you access may be limited
+2025-03-07 20:30:16,266 - INFO - Initializing ETF data
+2025-03-07 20:30:36,719 - WARNING - Connection pool is full, discarding connection: query2.finance.yahoo.com. Connection pool size: 10
+2025-03-07 20:30:36,770 - WARNING - Connection pool is full, discarding connection: query2.finance.yahoo.com. Connection pool size: 10

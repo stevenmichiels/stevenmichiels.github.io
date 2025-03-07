@@ -86,7 +86,7 @@ def calculate_metrics(prices, forecasts):
         }
     }
 
-def run_forecasts(instruments=['SPX', 'NDX', 'GC', 'XLE'], start_year=1962, subfolder='stevenmichiels.github.io'):
+def run_forecasts(instruments=['SPX', 'SMH', 'GC', 'XOM','CVX'], start_year=1962, subfolder='stevenmichiels.github.io'):
     """Run forecasts for multiple instruments and combine results into a single JSON file"""
     # Read the CSV file
     base_path = f'/Users/stevenmichiels/Repos/{subfolder}'
@@ -176,7 +176,7 @@ if __name__ == "__main__":
 
     if is_jupyter:
         # Default values when running in Jupyter
-        run_forecasts(instruments=['SPX', 'NDX', 'GC', 'CVX', 'XOM'], start_year=1962)
+        run_forecasts(instruments=['SPX', 'SMH', 'GC', 'CVX', 'XOM'], start_year=1962)
     else:
         # Command line argument parsing when running as script
         parser = argparse.ArgumentParser(description='Run forecast strategy on financial instruments')
