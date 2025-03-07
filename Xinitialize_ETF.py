@@ -86,15 +86,56 @@ def wrangle_tradingview(symbol_, exchange_, tickername_final, interval_='1D', n_
 
 
 def wrangle_barchart(tickername, tickername_final):
-    print(tickername_final)
-    df=pd.read_csv(os.path.join(datadir,tickername+'.csv'), header=1)
-    # rename Date Time to Date
-    df.rename(columns={'Date Time': 'Date'}, inplace=True)
-    df['Date'] = pd.to_datetime(df['Date'])
-    df.set_index('Date', inplace=True, drop=True)
-    df.drop(columns=['Change', 'Open Interest', 'High', 'Low', 'Open', 'Volume'], inplace=True)
-    df.columns = [tickername_final for num in df.columns]
-    return df
+    try:
+        file_path = os.path.join(datadir, tickername + '.csv')
+        if not os.path.exists(file_path):
+            print(f"File not found: {file_path}")
+            return pd.DataFrame()
+            
+        # Read CSV file with error handling
+        try:
+            df = pd.read_csv(file_path, header=1)
+        except pd.errors.EmptyDataError:
+            print(f"Empty or corrupt file: {file_path}")
+            return pd.DataFrame()
+            
+        print(f"Columns in {tickername}.csv: {df.columns.tolist()}")
+        
+        # Try different possible date column names
+        date_column = None
+        for col in ['Date Time', 'Date', 'DateTime', 'Timestamp']:
+            if col in df.columns:
+                date_column = col
+                break
+                
+        if date_column is None:
+            print(f"No date column found in {tickername}.csv")
+            return pd.DataFrame()
+            
+        # Rename the date column to 'Date'
+        df.rename(columns={date_column: 'Date'}, inplace=True)
+        
+        # Convert to datetime with error handling
+        try:
+            df['Date'] = pd.to_datetime(df['Date'])
+        except Exception as e:
+            print(f"Error converting dates in {tickername}.csv: {str(e)}")
+            print("First few date values:", df['Date'].head())
+            return pd.DataFrame()
+            
+        df.set_index('Date', inplace=True, drop=True)
+        
+        # Drop columns if they exist
+        columns_to_drop = ['Change', 'Open Interest', 'High', 'Low', 'Open', 'Volume']
+        existing_columns = [col for col in columns_to_drop if col in df.columns]
+        if existing_columns:
+            df.drop(columns=existing_columns, inplace=True)
+            
+        df.columns = [tickername_final for _ in df.columns]
+        return df
+    except Exception as e:
+        print(f"Error processing {tickername}.csv: {str(e)}")
+        return pd.DataFrame()
 
 
 def update_tv_with_yf(tv, tv_ticker, yf_ticker="^GSPC", overwrite_=True):

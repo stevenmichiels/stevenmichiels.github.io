@@ -104,10 +104,21 @@
                 console.log('Parsing JSON data...');
                 const data = await response.json();
                 
+                // Add debugging information
+                console.log('Data range:', {
+                    firstDate: data.dates[0],
+                    lastDate: data.dates[data.dates.length - 1],
+                    totalPoints: data.dates.length
+                });
+                
                 console.log('Creating plot...');
                 // Calculate start index for 2020-01-01
                 const startDate = new Date('2020-01-01');
                 const startIdx = data.dates.findIndex(d => new Date(d) >= startDate);
+                
+                // Get the last date from the data
+                const endDate = data.dates[data.dates.length - 1];
+                console.log('End date from data:', endDate);
                 
                 // Get price range for the selected period
                 const selectedPrices = data.prices.slice(startIdx);
@@ -146,7 +157,7 @@
                     }
                 ];
 
-                // Create layout
+                // Create layout with explicit date range
                 const layout = {
                     title: {
                         text: `${data.metadata.instrument} <br>` +
@@ -168,12 +179,14 @@
                     xaxis: {
                         rangeslider: { visible: true },
                         type: 'date',
-                        range: ['2020-01-01', data.dates[data.dates.length - 1]]
+                        range: ['2020-01-01', endDate],
+                        autorange: false
                     },
                     xaxis2: {
                         rangeslider: { visible: false },
                         type: 'date',
-                        range: ['2020-01-01', data.dates[data.dates.length - 1]]
+                        range: ['2020-01-01', endDate],
+                        autorange: false
                     },
                     yaxis: {
                         title: 'Forecast Signal',

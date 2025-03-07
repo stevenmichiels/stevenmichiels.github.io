@@ -152,7 +152,7 @@ if __name__ == "__main__":
 
     if is_jupyter:
         # Default values when running in Jupyter
-        run_forecast(instrument='GC', start_year=1962)
+        run_forecast(instrument='SPX', start_year=1962)
     else:
         # Command line argument parsing when running as script
         parser = argparse.ArgumentParser(description='Run forecast strategy on financial instrument')
