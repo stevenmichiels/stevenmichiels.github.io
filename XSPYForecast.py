@@ -7,6 +7,13 @@ from XForecastIndicator import ForecastIndicator, plot_forecast
 import argparse
 import json
 
+def find_latest_nan_date(df, instrument):
+    """Find the latest date where there are NaN values in the instrument column."""
+    nan_dates = df[df[instrument].isna()].index
+    if len(nan_dates) > 0:
+        return nan_dates[-1]
+    return None
+
 # Custom JSON encoder to handle NaN values
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -29,6 +36,11 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)
+
+    # Check for latest NaN date
+    latest_nan = find_latest_nan_date(df, instrument)
+    if latest_nan is not None:
+        print(f"\nLatest NaN value found on: {latest_nan.strftime('%Y-%m-%d')}")
 
     # Filter data from start_year onwards
     df = df[df.index.year >= start_year]
