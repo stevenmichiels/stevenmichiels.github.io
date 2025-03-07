@@ -64,6 +64,25 @@
             margin: 1rem 0;
             border-radius: 5px;
         }
+        .controls {
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        label {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -75,8 +94,12 @@
     
     <div class="container">
         <div class="content">
-            <h2>Welcome to Trend Forecast</h2>
-            <p>This is a simple website for Trend Forecasting and analysis.</p>
+            <div class="controls">
+                <label for="instrumentSelect">Select Instrument:</label>
+                <select id="instrumentSelect" onchange="updatePlot()">
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
 
             <div id="forecastPlot" class="forecast-container"></div>
         </div>
@@ -89,7 +112,184 @@
     </footer>
 
     <script>
-        // Function to fetch and plot data
+        let globalData = null;
+        
+        // Function to populate instrument selector
+        function populateInstrumentSelector(data) {
+            const select = document.getElementById('instrumentSelect');
+            select.innerHTML = ''; // Clear existing options
+            
+            // Add options for each instrument
+            data.metadata.instruments.forEach(instrument => {
+                const option = document.createElement('option');
+                option.value = instrument;
+                option.textContent = instrument;
+                select.appendChild(option);
+            });
+        }
+
+        // Function to update plot based on selected instrument
+        function updatePlot() {
+            if (!globalData) return;
+
+            const instrument = document.getElementById('instrumentSelect').value;
+            const instrumentData = globalData.instruments[instrument];
+            
+            // Calculate start index for 2020-01-01
+            const startDate = new Date('2020-01-01');
+            const startIdx = instrumentData.dates.findIndex(d => new Date(d) >= startDate);
+            
+            // Get price range for the selected period
+            const selectedPrices = instrumentData.prices.slice(startIdx);
+            const minPrice = Math.floor(Math.min(...selectedPrices.filter(p => p !== null)) / 100) * 100;
+            const maxPrice = Math.ceil(Math.max(...selectedPrices.filter(p => p !== null)) / 100) * 100;
+
+            // Create traces for the plot
+            const traces = [
+                {
+                    x: instrumentData.dates,
+                    y: instrumentData.forecasts,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Forecast Signal',
+                    line: { color: 'blue' },
+                    yaxis: 'y',
+                    hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
+                },
+                {
+                    x: instrumentData.dates,
+                    y: instrumentData.prices,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Price',
+                    line: { color: 'gray' },
+                    yaxis: 'y2',
+                    hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
+                }
+            ];
+
+            const layout = {
+                title: {
+                    text: `${instrument} <br>` +
+                          `(Last Update: ${globalData.metadata.last_update})`,
+                    font: { size: 16 }
+                },
+                grid: {
+                    rows: 2,
+                    columns: 1,
+                    pattern: 'independent',
+                    roworder: 'top to bottom'
+                },
+                height: 800,
+                showlegend: true,
+                legend: {
+                    orientation: 'h',
+                    y: 1.1
+                },
+                xaxis: {
+                    rangeslider: { visible: true },
+                    type: 'date',
+                    range: ['2020-01-01', instrumentData.dates[instrumentData.dates.length - 1]],
+                    autorange: false
+                },
+                xaxis2: {
+                    rangeslider: { visible: false },
+                    type: 'date',
+                    range: ['2020-01-01', instrumentData.dates[instrumentData.dates.length - 1]],
+                    autorange: false
+                },
+                yaxis: {
+                    title: 'Forecast Signal',
+                    domain: [0, 0.45],
+                    range: [-22, 22],
+                    zeroline: true,
+                    zerolinecolor: 'gray',
+                    zerolinewidth: 1,
+                    tickvals: [-20, -10, 0, 10, 20],
+                    gridcolor: 'lightgray'
+                },
+                yaxis2: {
+                    title: 'Price',
+                    domain: [0.55, 1],
+                    tickmode: 'linear',
+                    tick0: 0,
+                    dtick: 1000
+                }
+            };
+
+            // Add shapes for negative forecast periods
+            const shapes = [];
+            let isNegative = false;
+            let negativeStart = null;
+
+            instrumentData.forecasts.forEach((forecast, i) => {
+                if (forecast < 0 && !isNegative) {
+                    isNegative = true;
+                    negativeStart = instrumentData.dates[i];
+                } else if ((forecast >= 0 || i === instrumentData.forecasts.length - 1) && isNegative) {
+                    shapes.push({
+                        type: 'rect',
+                        x0: negativeStart,
+                        x1: instrumentData.dates[i],
+                        y0: 0,
+                        y1: 1,
+                        yref: 'paper',
+                        fillcolor: 'red',
+                        opacity: 0.1,
+                        line: { width: 0 }
+                    });
+                    isNegative = false;
+                }
+            });
+
+            // Add horizontal lines
+            shapes.push(
+                {
+                    type: 'line',
+                    x0: instrumentData.dates[0],
+                    y0: 20,
+                    x1: instrumentData.dates[instrumentData.dates.length - 1],
+                    y1: 20,
+                    yref: 'y',
+                    line: {
+                        color: 'gray',
+                        width: 1,
+                        dash: 'dash'
+                    }
+                },
+                {
+                    type: 'line',
+                    x0: instrumentData.dates[0],
+                    y0: -20,
+                    x1: instrumentData.dates[instrumentData.dates.length - 1],
+                    y1: -20,
+                    yref: 'y',
+                    line: {
+                        color: 'gray',
+                        width: 1,
+                        dash: 'dash'
+                    }
+                },
+                {
+                    type: 'line',
+                    x0: instrumentData.dates[0],
+                    y0: 0,
+                    x1: instrumentData.dates[instrumentData.dates.length - 1],
+                    y1: 0,
+                    yref: 'y',
+                    line: {
+                        color: 'gray',
+                        width: 1
+                    }
+                }
+            );
+
+            layout.shapes = shapes;
+
+            Plotly.newPlot('forecastPlot', traces, layout);
+        }
+
+        // Function to fetch and initialize plot data
         async function fetchAndPlotData() {
             const plotDiv = document.getElementById('forecastPlot');
             
@@ -102,184 +302,11 @@
                 }
                 
                 console.log('Parsing JSON data...');
-                const data = await response.json();
+                globalData = await response.json();
                 
-                // Add debugging information
-                console.log('Data range:', {
-                    firstDate: data.dates[0],
-                    lastDate: data.dates[data.dates.length - 1],
-                    totalPoints: data.dates.length
-                });
-                
-                console.log('Creating plot...');
-                // Calculate start index for 2020-01-01
-                const startDate = new Date('2020-01-01');
-                const startIdx = data.dates.findIndex(d => new Date(d) >= startDate);
-                
-                // Get the last date from the data
-                const endDate = data.dates[data.dates.length - 1];
-                console.log('End date from data:', endDate);
-                
-                // Get price range for the selected period
-                const selectedPrices = data.prices.slice(startIdx);
-                const minPrice = Math.floor(Math.min(...selectedPrices) / 100) * 100;
-                const maxPrice = Math.ceil(Math.max(...selectedPrices) / 100) * 100;
-                
-                // Generate tick values every 500 within the range
-                const tickvals = [];
-                const ticktext = [];
-                for (let i = minPrice; i <= maxPrice; i += 1000) {
-                    tickvals.push(i);
-                    ticktext.push(i.toString());
-                }
-
-                // Create traces for the plot
-                const traces = [
-                    {
-                        x: data.dates,
-                        y: data.forecasts,
-                        type: 'scatter',
-                        mode: 'lines',
-                        name: 'Forecast Signal',
-                        line: { color: 'blue' },
-                        yaxis: 'y',
-                        hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
-                    },
-                    {
-                        x: data.dates,
-                        y: data.prices,
-                        type: 'scatter',
-                        mode: 'lines',
-                        name: 'Price',
-                        line: { color: 'gray' },
-                        yaxis: 'y2',
-                        hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
-                    }
-                ];
-
-                // Create layout with explicit date range
-                const layout = {
-                    title: {
-                        text: `${data.metadata.instrument} <br>` +
-                              `(Last Update: ${data.metadata.last_update})`,
-                        font: { size: 16 }
-                    },
-                    grid: {
-                        rows: 2,
-                        columns: 1,
-                        pattern: 'independent',
-                        roworder: 'top to bottom'
-                    },
-                    height: 800,
-                    showlegend: true,
-                    legend: {
-                        orientation: 'h',
-                        y: 1.1
-                    },
-                    xaxis: {
-                        rangeslider: { visible: true },
-                        type: 'date',
-                        range: ['2020-01-01', endDate],
-                        autorange: false
-                    },
-                    xaxis2: {
-                        rangeslider: { visible: false },
-                        type: 'date',
-                        range: ['2020-01-01', endDate],
-                        autorange: false
-                    },
-                    yaxis: {
-                        title: 'Forecast Signal',
-                        domain: [0, 0.45],
-                        range: [-22, 22],
-                        zeroline: true,
-                        zerolinecolor: 'gray',
-                        zerolinewidth: 1,
-                        tickvals: [-20, -10, 0, 10, 20],
-                        gridcolor: 'lightgray'
-                    },
-                    yaxis2: {
-                        title: 'Price',
-                        domain: [0.55, 1],
-                        tickmode: 'linear',
-                        tick0: 0,
-                        dtick: 1000
-                    }
-                };
-
-                // Add horizontal lines and background shapes for negative forecasts
-                const shapes = [];
-                
-                // Add background shapes for negative forecast periods
-                let isNegative = false;
-                let negativeStart = null;
-                
-                data.forecasts.forEach((forecast, i) => {
-                    if (forecast < 0 && !isNegative) {
-                        isNegative = true;
-                        negativeStart = data.dates[i];
-                    } else if ((forecast >= 0 || i === data.forecasts.length - 1) && isNegative) {
-                        shapes.push({
-                            type: 'rect',
-                            x0: negativeStart,
-                            x1: data.dates[i],
-                            y0: 0,
-                            y1: 1,
-                            yref: 'paper',
-                            fillcolor: 'red',
-                            opacity: 0.1,
-                            line: { width: 0 }
-                        });
-                        isNegative = false;
-                    }
-                });
-
-                // Add the horizontal lines
-                shapes.push(
-                    {
-                        type: 'line',
-                        x0: data.dates[0],
-                        y0: 20,
-                        x1: data.dates[data.dates.length - 1],
-                        y1: 20,
-                        yref: 'y',
-                        line: {
-                            color: 'gray',
-                            width: 1,
-                            dash: 'dash'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        x0: data.dates[0],
-                        y0: -20,
-                        x1: data.dates[data.dates.length - 1],
-                        y1: -20,
-                        yref: 'y',
-                        line: {
-                            color: 'gray',
-                            width: 1,
-                            dash: 'dash'
-                        }
-                    },
-                    {
-                        type: 'line',
-                        x0: data.dates[0],
-                        y0: 0,
-                        x1: data.dates[data.dates.length - 1],
-                        y1: 0,
-                        yref: 'y',
-                        line: {
-                            color: 'gray',
-                            width: 1
-                        }
-                    }
-                );
-
-                layout.shapes = shapes;
-
-                // Create the plot
-                Plotly.newPlot('forecastPlot', traces, layout);
+                // Populate instrument selector and create initial plot
+                populateInstrumentSelector(globalData);
+                updatePlot();
 
             } catch (error) {
                 console.error('Error fetching or plotting data:', error);
@@ -287,7 +314,7 @@
                     <div class="error-message">
                         <h4>Error loading forecast data</h4>
                         <p>Details: ${error.message}</p>
-                        <p>Please make sure you have run the Python script (XSPYForecast.py) to generate the forecast data.</p>
+                        <p>Please make sure you have run the Python script (XGenerateForecast.py) to generate the forecast data.</p>
                     </div>`;
             }
         }
