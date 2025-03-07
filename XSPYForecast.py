@@ -5,6 +5,7 @@ from plotly.subplots import make_subplots
 import os
 from XForecastIndicator import ForecastIndicator, plot_forecast
 import argparse
+import json
 
 def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.github.io'):
     # Read the CSV file
@@ -23,8 +24,8 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     # Extract instrument prices
     prices = df[instrument]
     
-    # Create output filename based on instrument
-    output_path = f'/Users/stevenmichiels/Repos/' +subfolder+'/{instrument}_strategy_performance.html'
+    # Create output filename for JSON
+    output_path = f'/Users/stevenmichiels/Repos/{subfolder}/forecast_data.json'
 
     # Create a forecast indicator and calculate forecasts
     indicator = ForecastIndicator(base_period=8, include='16-64-256')
@@ -70,61 +71,32 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     strategy_sharpe = strategy_cagr / strategy_vol
     bh_sharpe = bh_cagr / bh_vol
 
-    # Create subplot figure with three rows
-    fig = make_subplots(rows=3, cols=1, 
-                        subplot_titles=('Cumulative Returns (%)', 'Drawdown (%)', 'Position Signal'),
-                        vertical_spacing=0.1,
-                        row_heights=[0.4, 0.3, 0.3])
+    # Prepare data for JSON export
+    forecast_data = {
+        'dates': df.index.strftime('%Y-%m-%d').tolist(),
+        'prices': prices.tolist(),
+        'forecasts': forecasts.tolist(),
+        'cumulative_returns': cumulative_returns.tolist(),
+        'buy_hold_returns': buy_hold_returns.tolist(),
+        'strategy_drawdown': strategy_dd.tolist(),
+        'bh_drawdown': bh_dd.tolist(),
+        'positions': positions.tolist(),
+        'strategy_final_return': f"{cumulative_returns.iloc[-1]:.1f}",
+        'bh_final_return': f"{buy_hold_returns.iloc[-1]:.1f}",
+        'avg_strategy_dd': f"{strategy_dd.mean():.1f}",
+        'avg_bh_dd': f"{bh_dd.mean():.1f}",
+        'strategy_sharpe': f"{strategy_sharpe:.2f}",
+        'bh_sharpe': f"{bh_sharpe:.2f}",
+        'metadata': {
+            'instrument': instrument,
+            'start_year': start_year,
+            'last_update': pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+    }
 
-    # Add cumulative return traces
-    fig.add_trace(
-        go.Scatter(x=cumulative_returns.index, y=cumulative_returns, 
-                   name='Strategy Returns', line=dict(color='blue')),
-        row=1, col=1
-    )
-    fig.add_trace(
-        go.Scatter(x=buy_hold_returns.index, y=buy_hold_returns, 
-                   name='Buy & Hold Returns', line=dict(color='gray')),
-        row=1, col=1
-    )
-
-    # Add drawdown traces
-    fig.add_trace(
-        go.Scatter(x=strategy_dd.index, y=strategy_dd, 
-                   name='Strategy Drawdown', line=dict(color='red')),
-        row=2, col=1
-    )
-    fig.add_trace(
-        go.Scatter(x=bh_dd.index, y=bh_dd, 
-                   name='Buy & Hold Drawdown', line=dict(color='orange')),
-        row=2, col=1
-    )
-
-    # Add position signal trace (now in third row)
-    fig.add_trace(
-        go.Scatter(x=positions.index, y=positions, 
-                   name='Position (1=Long, 0=Cash)', line=dict(color='green')),
-        row=3, col=1
-    )
-
-    # Calculate average drawdowns
-    avg_strategy_dd = strategy_dd.mean()
-    avg_bh_dd = bh_dd.mean()
-
-    # Update layout with instrument name
-    fig.update_layout(
-        title=f'{instrument} Portfolio Performance with Forecast Signals<br>'
-              f'Strategy Sharpe: {strategy_sharpe:.2f} | Buy&Hold Sharpe: {bh_sharpe:.2f}<br>'
-              f'Avg DD Strategy: {avg_strategy_dd:.1f}% | Avg DD Buy&Hold: {avg_bh_dd:.1f}%',
-        height=1000,
-        showlegend=True,
-        yaxis_title="Returns (%)",
-        yaxis2_title="Drawdown (%)",
-        yaxis3_title="Position (1=Long, 0=Cash)"
-    )
-
-    # Save the figure
-    fig.write_html(output_path)
+    # Save to JSON file
+    with open(output_path, 'w') as f:
+        json.dump(forecast_data, f)
 
     # Print performance statistics
     print(f"\nPerformance Summary for {instrument}:")
@@ -135,7 +107,7 @@ def run_forecast(instrument='SPX', start_year=1962, subfolder='stevenmichiels.gi
     print(f"Number of Trades: {positions.diff().abs().sum() / 2:.0f}")
     print(f"Max Drawdown Strategy: {strategy_dd.min():.1f}%")
     print(f"Max Drawdown Buy&Hold: {bh_dd.min():.1f}%")
-    print(f"\n✅ Performance plot has been saved as '{output_path}'")
+    print(f"\n✅ Forecast data has been saved as '{output_path}'")
 
 if __name__ == "__main__":
     try:

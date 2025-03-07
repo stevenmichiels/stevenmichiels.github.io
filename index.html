@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trend Forecast</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -64,9 +66,7 @@
             <p>This is a simple website for ETF forecasting and analysis.</p>
             
             <h3>SPY ETF Forecast</h3>
-            <div class="forecast-container">
-                <iframe src="/SPX_strategy_performance.html" width="100%" height="100%" frameborder="0"></iframe>
-            </div>
+            <div id="forecastPlot" class="forecast-container"></div>
         </div>
     </div>
     
@@ -75,5 +75,112 @@
             <p>&copy; 2023 Trend Forecast. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Function to fetch and plot data
+        async function fetchAndPlotData() {
+            try {
+                // Fetch data from your API or local JSON file
+                const response = await fetch('forecast_data.json');
+                const data = await response.json();
+                
+                // Create traces for the plot
+                const trace1 = {
+                    x: data.dates,
+                    y: data.cumulative_returns,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Strategy Returns',
+                    line: { color: 'blue' },
+                    yaxis: 'y'
+                };
+
+                const trace2 = {
+                    x: data.dates,
+                    y: data.buy_hold_returns,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Buy & Hold Returns',
+                    line: { color: 'gray' },
+                    yaxis: 'y'
+                };
+
+                const trace3 = {
+                    x: data.dates,
+                    y: data.strategy_drawdown,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Strategy Drawdown',
+                    line: { color: 'red' },
+                    yaxis: 'y2'
+                };
+
+                const trace4 = {
+                    x: data.dates,
+                    y: data.bh_drawdown,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Buy & Hold Drawdown',
+                    line: { color: 'orange' },
+                    yaxis: 'y2'
+                };
+
+                const trace5 = {
+                    x: data.dates,
+                    y: data.positions,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Position (1=Long, 0=Cash)',
+                    line: { color: 'green' },
+                    yaxis: 'y3'
+                };
+
+                // Create layout
+                const layout = {
+                    title: {
+                        text: `SPX Portfolio Performance with Forecast Signals<br>` +
+                              `Strategy Return: ${data.strategy_final_return}% | Buy&Hold Return: ${data.bh_final_return}%<br>` +
+                              `Avg DD Strategy: ${data.avg_strategy_dd}% | Avg DD Buy&Hold: ${data.avg_bh_dd}%`,
+                        font: { size: 16 }
+                    },
+                    grid: {
+                        rows: 3,
+                        columns: 1,
+                        pattern: 'independent',
+                        roworder: 'top to bottom'
+                    },
+                    height: 1000,
+                    showlegend: true,
+                    legend: {
+                        orientation: 'h',
+                        y: 1.1
+                    },
+                    yaxis: {
+                        title: 'Returns (%)',
+                        domain: [0.7, 1]
+                    },
+                    yaxis2: {
+                        title: 'Drawdown (%)',
+                        domain: [0.35, 0.65]
+                    },
+                    yaxis3: {
+                        title: 'Position',
+                        domain: [0, 0.3],
+                        range: [-0.1, 1.1]
+                    }
+                };
+
+                // Create the plot
+                Plotly.newPlot('forecastPlot', [trace1, trace2, trace3, trace4, trace5], layout);
+
+            } catch (error) {
+                console.error('Error fetching or plotting data:', error);
+                document.getElementById('forecastPlot').innerHTML = 'Error loading forecast data';
+            }
+        }
+
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', fetchAndPlotData);
+    </script>
 </body>
 </html>
