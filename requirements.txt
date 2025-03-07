@@ -1,0 +1,8 @@
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+yfinance
+scikit-learn
+python-dotenv>=0.19.0 

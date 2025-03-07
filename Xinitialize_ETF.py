@@ -10,6 +10,10 @@ import seaborn as sns
 import plotly.express as px
 import logging
 from concurrent.futures import ThreadPoolExecutor
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 logging.basicConfig(
     level=logging.INFO,
@@ -17,9 +21,10 @@ logging.basicConfig(
     filename='etf_initialization.log'
 )
 
-username = 'michiels.capitalmanagement@gmail.com'
-password = 'JCDu2pqRldJg!JV'
-datadir = '/Users/stevenmichiels/Repos/ETF'
+# Get credentials from environment variables
+username = os.getenv('TV_USERNAME')
+password = os.getenv('TV_PASSWORD')
+datadir = os.getenv('DATA_DIR')
 
 from tvScrape import TvScrape, Interval
 tv = TvScrape(username, password)
