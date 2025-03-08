@@ -311,22 +311,60 @@
                 }
             }
 
-            // Create price chart
-            const priceTrace = {
-                x: filteredDates,
-                y: filteredPrices,
+            // Create separate arrays for positive and negative forecast price segments
+            const positiveDates = [];
+            const positivePrices = [];
+            const negativeDates = [];
+            const negativePrices = [];
+            
+            for (let i = 0; i < filteredDates.length; i++) {
+                if (filteredForecasts[i] >= 0) {
+                    positiveDates.push(filteredDates[i]);
+                    positivePrices.push(filteredPrices[i]);
+                    // Add null to negative arrays to create a gap
+                    if (negativeDates.length > 0 && negativeDates[negativeDates.length-1] !== null) {
+                        negativeDates.push(filteredDates[i]);
+                        negativePrices.push(null);
+                    }
+                } else {
+                    negativeDates.push(filteredDates[i]);
+                    negativePrices.push(filteredPrices[i]);
+                    // Add null to positive arrays to create a gap
+                    if (positiveDates.length > 0 && positiveDates[positiveDates.length-1] !== null) {
+                        positiveDates.push(filteredDates[i]);
+                        positivePrices.push(null);
+                    }
+                }
+            }
+
+            // Create price traces for positive and negative forecast segments
+            const positivePriceTrace = {
+                x: positiveDates,
+                y: positivePrices,
                 type: 'scatter',
-                name: 'Price',
-                line: { color: '#2c3e50' },
+                name: 'Price (Positive Forecast)',
+                line: { color: 'green', width: 2 },
                 hoverinfo: 'none',
                 hoverlabel: {
                     bgcolor: 'white',
                     font: { color: 'black' }
-                }
+                },
+                customdata: filteredForecasts.filter((_, i) => filteredForecasts[i] >= 0)
             };
-
-            // Add customdata to price trace for showing forecast values
-            priceTrace.customdata = filteredForecasts;
+            
+            const negativePriceTrace = {
+                x: negativeDates,
+                y: negativePrices,
+                type: 'scatter',
+                name: 'Price (Negative Forecast)',
+                line: { color: 'red', width: 2 },
+                hoverinfo: 'none',
+                hoverlabel: {
+                    bgcolor: 'white',
+                    font: { color: 'black' }
+                },
+                customdata: filteredForecasts.filter((_, i) => filteredForecasts[i] < 0)
+            };
 
             // Create EMA traces
             const ema128GreenTrace = {
@@ -517,7 +555,7 @@
             };
 
             // Create new plots with full range
-            Plotly.newPlot('priceChart', [priceTrace, ema128GreenTrace, ema128RedTrace], priceLayout, config);
+            Plotly.newPlot('priceChart', [positivePriceTrace, negativePriceTrace, ema128GreenTrace, ema128RedTrace], priceLayout, config);
             Plotly.newPlot('forecastChart', [forecastTrace], forecastLayout, config);
 
             // Add custom hover events
@@ -527,7 +565,21 @@
                     const date = new Date(point.x);
                     const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
                     const price = point.y.toFixed(1);
-                    const trend = point.customdata.toFixed(1);
+                    
+                    // Get trend value - it might be in customdata or we need to find it
+                    let trend;
+                    if (point.customdata !== undefined) {
+                        trend = point.customdata;
+                    } else {
+                        // Find the trend value for this date
+                        const dateStr = date.toISOString().split('T')[0];
+                        const dateIndex = filteredDates.findIndex(d => d.includes(dateStr));
+                        trend = dateIndex >= 0 ? filteredForecasts[dateIndex] : 'N/A';
+                    }
+                    
+                    if (typeof trend === 'number') {
+                        trend = trend.toFixed(1);
+                    }
                     
                     const hoverInfo = document.createElement('div');
                     hoverInfo.style.backgroundColor = 'white';
