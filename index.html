@@ -286,8 +286,8 @@
                 type: 'scatter',
                 name: 'Price',
                 line: { color: '#2c3e50' },
-                hovertemplate: '<b>Date:</b> %{x|%Y-%m-%d}<br>' +
-                             '<b>Price:</b> $ %{y:.1f}<br>' +
+                hovertemplate: '%{x|%b %d, %Y}<br>' +
+                             '<b>Price:</b> $%{y:.1f}<br>' +
                              '<b>Trend:</b> %{customdata:.1f}<extra></extra>'
             };
 
@@ -350,7 +350,7 @@
                 name: 'Forecast',
                 line: { color: '#808080' },  // Changed to gray
                 showlegend: false,
-                hovertemplate: '<b>Date:</b> %{x|%Y-%m-%d}<br>' +
+                hovertemplate: '%{x|%b %d, %Y}<br>' +
                              '<b>Trend:</b> %{y:.1f}<extra></extra>'
             };
 
