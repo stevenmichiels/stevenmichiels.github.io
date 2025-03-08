@@ -351,7 +351,11 @@
                 line: { color: '#808080' },  // Changed to gray
                 showlegend: false,
                 hovertemplate: '%{x|%b %d, %Y}<br>' +
-                             '<b>Trend:</b> %{y:.1f}<extra></extra>'
+                             '<b>Trend:</b> %{y:.1f}<extra></extra>',
+                hoverlabel: {
+                    font: { color: 'white' },
+                    bgcolor: 'gray'
+                }
             };
 
             // Create background shapes for negative forecast periods in the forecast chart
