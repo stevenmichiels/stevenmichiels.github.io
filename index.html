@@ -325,7 +325,9 @@
                 xaxis: {
                     rangeslider: { visible: false },
                     type: 'date',
-                    range: [defaultStartDate, endDate]
+                    range: [defaultStartDate, endDate],
+                    showspikes: false,  // Removes the vertical hover line
+                    hoverformat: ''     // Removes the date hover at bottom
                 },
                 yaxis: { 
                     title: {
@@ -339,7 +341,9 @@
                 },
                 height: 400,
                 margin: { t: 40, b: 20 },
-                shapes: backgroundShapes
+                shapes: backgroundShapes,
+                hovermode: 'y unified',
+                hoverdistance: -1
             };
 
             // Create forecast chart with a single black line and background shading
@@ -348,13 +352,13 @@
                 y: filteredForecasts,
                 type: 'scatter',
                 name: 'Forecast',
-                line: { color: '#808080' },  // Changed to gray
+                line: { color: '#808080' },
                 showlegend: false,
                 hovertemplate: '%{x|%b %d, %Y}<br>' +
                              '<b>Trend:</b> %{y:.1f}<extra></extra>',
                 hoverlabel: {
-                    font: { color: 'white' },
-                    bgcolor: 'gray'
+                    font: { color: 'black' },
+                    bgcolor: 'white'
                 }
             };
 
@@ -403,7 +407,9 @@
                 xaxis: {
                     rangeslider: { visible: true },
                     type: 'date',
-                    range: [defaultStartDate, endDate]
+                    range: [defaultStartDate, endDate],
+                    showspikes: false,  // Removes the vertical hover line
+                    hoverformat: ''     // Removes the date hover at bottom
                 },
                 yaxis: {
                     title: {
@@ -418,7 +424,9 @@
                 },
                 height: 300,
                 margin: { t: 40, b: 100 },
-                shapes: forecastBackgroundShapes
+                shapes: forecastBackgroundShapes,
+                hovermode: 'y unified',
+                hoverdistance: -1
             };
 
             // Add configuration options for better interactivity
