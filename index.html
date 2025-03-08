@@ -279,61 +279,20 @@
             const defaultStartDate = new Date(endDate);
             defaultStartDate.setFullYear(defaultStartDate.getFullYear() - 3);
 
-            // Create separate arrays for positive and negative forecast price segments
-            const positiveDates = [];
-            const positivePrices = [];
-            const negativeDates = [];
-            const negativePrices = [];
-            
-            for (let i = 0; i < filteredDates.length; i++) {
-                if (filteredForecasts[i] >= 0) {
-                    positiveDates.push(filteredDates[i]);
-                    positivePrices.push(filteredPrices[i]);
-                    // Add null to negative arrays to create a gap
-                    if (negativeDates.length > 0 && negativeDates[negativeDates.length-1] !== null) {
-                        negativeDates.push(filteredDates[i]);
-                        negativePrices.push(null);
-                    }
-                } else {
-                    negativeDates.push(filteredDates[i]);
-                    negativePrices.push(filteredPrices[i]);
-                    // Add null to positive arrays to create a gap
-                    if (positiveDates.length > 0 && positiveDates[positiveDates.length-1] !== null) {
-                        positiveDates.push(filteredDates[i]);
-                        positivePrices.push(null);
-                    }
-                }
-            }
-
-            // Create price traces for positive and negative forecast segments
-            const positivePriceTrace = {
-                x: positiveDates,
-                y: positivePrices,
+            // Create price chart
+            const priceTrace = {
+                x: filteredDates,
+                y: filteredPrices,
                 type: 'scatter',
-                name: 'Price (Positive Forecast)',
-                line: { color: 'green', width: 2 },
+                name: 'Price',
+                line: { color: '#2c3e50', width: 2 },
                 hoverinfo: 'none',
                 showlegend: false,
                 hoverlabel: {
                     bgcolor: 'white',
                     font: { color: 'black' }
                 },
-                customdata: filteredForecasts.filter((_, i) => filteredForecasts[i] >= 0)
-            };
-            
-            const negativePriceTrace = {
-                x: negativeDates,
-                y: negativePrices,
-                type: 'scatter',
-                name: 'Price (Negative Forecast)',
-                line: { color: 'red', width: 2 },
-                hoverinfo: 'none',
-                showlegend: false,
-                hoverlabel: {
-                    bgcolor: 'white',
-                    font: { color: 'black' }
-                },
-                customdata: filteredForecasts.filter((_, i) => filteredForecasts[i] < 0)
+                customdata: filteredForecasts
             };
 
             // Create shapes for background coloring based on forecast values
@@ -353,7 +312,7 @@
                             x1: filteredDates[i - 1],
                             y0: Math.min(...filteredPrices) * 0.9,  // Extend below lowest price
                             y1: Math.max(...filteredPrices) * 1.1,  // Extend above highest price
-                            fillcolor: 'rgba(231, 76, 60, 0.2)',  // Made red deeper
+                            fillcolor: 'rgba(231, 76, 60, 0.35)',  // Deeper red with more opacity
                             line: { width: 0 },
                             layer: 'below'
                         });
@@ -500,7 +459,7 @@
             };
 
             // Create new plots with full range
-            Plotly.newPlot('priceChart', [positivePriceTrace, negativePriceTrace], priceLayout, config);
+            Plotly.newPlot('priceChart', [priceTrace], priceLayout, config);
             Plotly.newPlot('forecastChart', [forecastTrace], forecastLayout, config);
 
             // Add custom hover events
