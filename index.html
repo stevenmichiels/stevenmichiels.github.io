@@ -403,10 +403,17 @@
                     spikethickness: 1
                 },
                 height: 400,
-                margin: { t: 40, b: 20 },
+                margin: { t: 40, b: 80 },
                 shapes: backgroundShapes,
                 hovermode: 'x',
-                hoverdistance: -1
+                hoverdistance: -1,
+                legend: {
+                    orientation: 'h',
+                    y: -0.15,
+                    yanchor: 'top',
+                    x: 0.5,
+                    xanchor: 'center'
+                }
             };
 
             // Create forecast chart with a single black line and background shading
