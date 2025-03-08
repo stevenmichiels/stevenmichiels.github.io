@@ -481,7 +481,7 @@
                     hoverInfo.style.top = (point.yaxis.d2p(point.y) - 40) + 'px';
                     hoverInfo.style.zIndex = 1000;
                     hoverInfo.style.pointerEvents = 'none';
-                    hoverInfo.innerHTML = `${formattedDate}<br>$${price}<br>Trend: ${trend}`;
+                    hoverInfo.innerHTML = `${formattedDate}<br>$ ${price}<br>Trend: ${trend}`;
                     
                     // Remove any existing hover info
                     const existingInfo = document.querySelector('.custom-hover-info');
