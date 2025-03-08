@@ -7,7 +7,7 @@ import sys
 import os
 
 # Create logs directory if it doesn't exist
-log_file = '/Users/stevenmichiels/pst/forecast.log'
+log_file = '/Users/stevenmichiels/Repos/stevenmichiels.github.io/forecast.log'
 try:
     # Ensure the directory exists
     os.makedirs(os.path.dirname(log_file), exist_ok=True)

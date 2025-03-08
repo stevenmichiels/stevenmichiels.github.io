@@ -285,8 +285,14 @@
                 y: filteredPrices,
                 type: 'scatter',
                 name: 'Price',
-                line: { color: '#2c3e50' }
+                line: { color: '#2c3e50' },
+                hovertemplate: '<b>Date:</b> %{x|%Y-%m-%d}<br>' +
+                             '<b>Price:</b> $%{y:.1f}<br>' +
+                             '<b>Trend:</b> %{customdata:.1f}<extra></extra>'
             };
+
+            // Add customdata to price trace for showing forecast values
+            priceTrace.customdata = filteredForecasts;
 
             // Create shapes for background coloring based on forecast values
             const backgroundShapes = [];
@@ -343,7 +349,9 @@
                 type: 'scatter',
                 name: 'Forecast',
                 line: { color: '#808080' },  // Changed to gray
-                showlegend: false
+                showlegend: false,
+                hovertemplate: '<b>Date:</b> %{x|%Y-%m-%d}<br>' +
+                             '<b>Trend:</b> %{y:.1f}<extra></extra>'
             };
 
             // Create background shapes for negative forecast periods in the forecast chart
