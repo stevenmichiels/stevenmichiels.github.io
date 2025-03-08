@@ -139,7 +139,7 @@
 </head>
 <body>
     <div class="header">
-        <h1><img src="favicon.ico" alt="Icon" style="height: 40px; vertical-align: middle; margin-right: 10px;">Market Trend Signals</h1>
+        <h1><img src="favicon.ico" alt="Icon" style="height: 50px; vertical-align: middle; margin-right: 10px;">Market Trend Signals</h1>
     </div>
     <div class="container">
         <div class="table-container">
@@ -477,11 +477,22 @@
                     hoverInfo.style.border = '1px solid #ddd';
                     hoverInfo.style.borderRadius = '4px';
                     hoverInfo.style.position = 'absolute';
-                    hoverInfo.style.left = (point.xaxis.d2p(point.x) + 10) + 'px';
-                    hoverInfo.style.top = (point.yaxis.d2p(point.y) - 40) + 'px';
+                    
+                    // Get chart container position
+                    const chartContainer = document.getElementById('priceChart');
+                    const chartRect = chartContainer.getBoundingClientRect();
+                    
+                    // Calculate position relative to chart container
+                    const xPos = point.xaxis.d2p(point.x) + chartRect.left + 10;
+                    const yPos = point.yaxis.d2p(point.y) + chartRect.top - 40;
+                    
+                    // Ensure hover box stays within chart boundaries
+                    hoverInfo.style.left = Math.max(chartRect.left, Math.min(xPos, chartRect.right - 100)) + 'px';
+                    hoverInfo.style.top = Math.max(chartRect.top, Math.min(yPos, chartRect.bottom - 80)) + 'px';
+                    
                     hoverInfo.style.zIndex = 1000;
                     hoverInfo.style.pointerEvents = 'none';
-                    hoverInfo.innerHTML = `${formattedDate}<br>$ ${price}<br>Trend: ${trend}`;
+                    hoverInfo.innerHTML = `${formattedDate}<br>$${price}<br>Trend: ${trend}`;
                     
                     // Remove any existing hover info
                     const existingInfo = document.querySelector('.custom-hover-info');
@@ -505,8 +516,19 @@
                     hoverInfo.style.border = '1px solid #ddd';
                     hoverInfo.style.borderRadius = '4px';
                     hoverInfo.style.position = 'absolute';
-                    hoverInfo.style.left = (point.xaxis.d2p(point.x) + 10) + 'px';
-                    hoverInfo.style.top = (point.yaxis.d2p(point.y) - 40) + 'px';
+                    
+                    // Get chart container position
+                    const chartContainer = document.getElementById('forecastChart');
+                    const chartRect = chartContainer.getBoundingClientRect();
+                    
+                    // Calculate position relative to chart container
+                    const xPos = point.xaxis.d2p(point.x) + chartRect.left + 10;
+                    const yPos = point.yaxis.d2p(point.y) + chartRect.top - 40;
+                    
+                    // Ensure hover box stays within chart boundaries
+                    hoverInfo.style.left = Math.max(chartRect.left, Math.min(xPos, chartRect.right - 100)) + 'px';
+                    hoverInfo.style.top = Math.max(chartRect.top, Math.min(yPos, chartRect.bottom - 80)) + 'px';
+                    
                     hoverInfo.style.zIndex = 1000;
                     hoverInfo.style.pointerEvents = 'none';
                     hoverInfo.innerHTML = `${formattedDate}<br>Trend: ${trend}`;
