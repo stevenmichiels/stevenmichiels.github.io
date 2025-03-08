@@ -287,7 +287,8 @@
                 name: 'Price',
                 line: { color: '#2c3e50' },
                 hovertemplate: '%{x|%b %d, %Y}<br>' +
-                             '<b>Trend:</b> %{customdata:.1f}<extra></extra>',
+                             '$%{y:.1f}<br>' +
+                             'Trend: %{customdata:.1f}<extra></extra>',
                 hoverlabel: {
                     bgcolor: 'white',
                     font: { color: 'black' }
@@ -368,7 +369,7 @@
                 line: { color: '#808080' },
                 showlegend: false,
                 hovertemplate: '%{x|%b %d, %Y}<br>' +
-                             '<b>Trend:</b> %{y:.1f}<extra></extra>',
+                             'Trend: %{y:.1f}<extra></extra>',
                 hoverlabel: {
                     font: { color: 'black' },
                     bgcolor: 'white'
