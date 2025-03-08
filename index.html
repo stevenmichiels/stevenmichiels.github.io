@@ -3,324 +3,466 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Add base URL -->
-    <base href="/">
-    <!-- Add favicon just before title -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <title>Trend Forecast</title>
+    <title>Market Trend Forecast</title>
     <!-- Include Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --background-color: #f5f7fa;
+            --text-color: #2c3e50;
+            --negative-color: #e74c3c;
+            --positive-color: #2ecc71;
         }
-        .container {
-            width: 80%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        header {
-            background-color: #2c3e50;
+
+        /* Add header styles */
+        .header {
+            background-color: var(--accent-color);
             color: white;
-            padding: 1rem 0;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        h1 {
+
+        .header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 28px;
+            font-weight: 500;
         }
-        .content {
-            background-color: white;
-            padding: 2rem;
-            margin-top: 2rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
-        .forecast-container {
+
+        .container {
+            display: grid;
+            grid-template-columns: minmax(300px, 1fr) 2fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: none;
+        }
+
+        table {
             width: 100%;
-            height: 1000px;
-            margin-top: 2rem;
+            border-collapse: collapse;
+            margin-bottom: 20px;
         }
-        footer {
+
+        th, td {
+            padding: 12px;
             text-align: center;
-            margin-top: 2rem;
-            padding: 1rem 0;
-            color: #666;
-            font-size: 0.9rem;
+            border-bottom: 1px solid #eee;
         }
-        .error-message {
-            color: #721c24;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 5px;
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
         }
-        .controls {
-            margin: 1rem 0;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+
+        tr:hover {
+            background-color: #f5f5f5;
+            cursor: pointer;
         }
-        select {
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-            min-width: 200px;
+
+        .negative {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--negative-color);
         }
-        label {
-            font-weight: bold;
+
+        .selected {
+            background-color: var(--accent-color) !important;
+            color: white;
+        }
+
+        .selected-row td:first-child {
+            background-color: var(--accent-color) !important;
+            color: white !important;
+        }
+
+        #chartTitle {
+            margin: 0 0 20px 0;
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add new styles for forecast values */
+        .forecast-cell {
+            color: black !important;
+        }
+
+        .forecast-negative {
+            background-color: rgba(231, 76, 60, 0.2);
+        }
+
+        .forecast-very-negative {
+            background-color: rgba(231, 76, 60, 0.4);
+        }
+
+        .forecast-positive {
+            background-color: rgba(46, 204, 113, 0.2);
+        }
+
+        .forecast-very-positive {
+            background-color: rgba(46, 204, 113, 0.4);
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Trend Forecast</h1>
-        </div>
-    </header>
-    
+    <div class="header">
+        <h1>Trend Signals</h1>
+    </div>
     <div class="container">
-        <div class="content">
-            <div class="controls">
-                <label for="instrumentSelect">Select Instrument:</label>
-                <select id="instrumentSelect" onchange="updatePlot()">
-                    <!-- Options will be populated dynamically -->
-                </select>
-            </div>
-
-            <div id="forecastPlot" class="forecast-container"></div>
+        <div class="table-container">
+            <table id="instrumentTable">
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Forecast</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <div class="chart-container" id="chartContainer">
+            <h2 id="chartTitle">Select an instrument to view details</h2>
+            <div id="priceChart"></div>
+            <div id="forecastChart"></div>
         </div>
     </div>
-    
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Trend Forecast. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
-        let globalData = null;
-        
-        // Function to populate instrument selector
-        function populateInstrumentSelector(data) {
-            const select = document.getElementById('instrumentSelect');
-            select.innerHTML = ''; // Clear existing options
-            
-            // Add options for each instrument
-            data.metadata.instruments.forEach(instrument => {
-                const option = document.createElement('option');
-                option.value = instrument;
-                option.textContent = instrument;
-                select.appendChild(option);
-            });
-        }
+        let currentData = null;
+        let selectedInstrument = null;
 
-        // Function to update plot based on selected instrument
-        function updatePlot() {
-            if (!globalData) return;
-
-            const instrument = document.getElementById('instrumentSelect').value;
-            const instrumentData = globalData.instruments[instrument];
-            
-            // Calculate start index for 2020-01-01
-            const startDate = new Date('2020-01-01');
-            const startIdx = instrumentData.dates.findIndex(d => new Date(d) >= startDate);
-            
-            // Get price range for the selected period
-            const selectedPrices = instrumentData.prices.slice(startIdx);
-            const minPrice = Math.floor(Math.min(...selectedPrices.filter(p => p !== null)) / 100) * 100;
-            const maxPrice = Math.ceil(Math.max(...selectedPrices.filter(p => p !== null)) / 100) * 100;
-
-            // Create traces for the plot
-            const traces = [
-                {
-                    x: instrumentData.dates,
-                    y: instrumentData.forecasts,
-                    type: 'scatter',
-                    mode: 'lines',
-                    name: 'Forecast Signal',
-                    line: { color: 'blue' },
-                    yaxis: 'y',
-                    hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
-                },
-                {
-                    x: instrumentData.dates,
-                    y: instrumentData.prices,
-                    type: 'scatter',
-                    mode: 'lines',
-                    name: 'Price',
-                    line: { color: 'gray' },
-                    yaxis: 'y2',
-                    hovertemplate: '%{y:.1f}<br>%{x}<extra></extra>'
-                }
-            ];
-
-            const layout = {
-                title: {
-                    text: `${instrument} <br>` +
-                          `(Last Update: ${globalData.metadata.last_update})`,
-                    font: { size: 16 }
-                },
-                grid: {
-                    rows: 2,
-                    columns: 1,
-                    pattern: 'independent',
-                    roworder: 'top to bottom'
-                },
-                height: 800,
-                showlegend: true,
-                legend: {
-                    orientation: 'h',
-                    y: 1.1
-                },
-                xaxis: {
-                    rangeslider: { visible: true },
-                    type: 'date',
-                    range: ['2020-01-01', instrumentData.dates[instrumentData.dates.length - 1]],
-                    autorange: false
-                },
-                xaxis2: {
-                    rangeslider: { visible: false },
-                    type: 'date',
-                    range: ['2020-01-01', instrumentData.dates[instrumentData.dates.length - 1]],
-                    autorange: false
-                },
-                yaxis: {
-                    title: 'Forecast Signal',
-                    domain: [0, 0.45],
-                    range: [-22, 22],
-                    zeroline: true,
-                    zerolinecolor: 'gray',
-                    zerolinewidth: 1,
-                    tickvals: [-20, -10, 0, 10, 20],
-                    gridcolor: 'lightgray'
-                },
-                yaxis2: {
-                    title: 'Price',
-                    domain: [0.55, 1],
-                    tickmode: 'linear',
-                    tick0: 0,
-                    dtick: 1000
-                }
-            };
-
-            // Add shapes for negative forecast periods
-            const shapes = [];
-            let isNegative = false;
-            let negativeStart = null;
-
-            instrumentData.forecasts.forEach((forecast, i) => {
-                if (forecast < 0 && !isNegative) {
-                    isNegative = true;
-                    negativeStart = instrumentData.dates[i];
-                } else if ((forecast >= 0 || i === instrumentData.forecasts.length - 1) && isNegative) {
-                    shapes.push({
-                        type: 'rect',
-                        x0: negativeStart,
-                        x1: instrumentData.dates[i],
-                        y0: 0,
-                        y1: 1,
-                        yref: 'paper',
-                        fillcolor: 'red',
-                        opacity: 0.1,
-                        line: { width: 0 }
-                    });
-                    isNegative = false;
-                }
-            });
-
-            // Add horizontal lines
-            shapes.push(
-                {
-                    type: 'line',
-                    x0: instrumentData.dates[0],
-                    y0: 20,
-                    x1: instrumentData.dates[instrumentData.dates.length - 1],
-                    y1: 20,
-                    yref: 'y',
-                    line: {
-                        color: 'gray',
-                        width: 1,
-                        dash: 'dash'
-                    }
-                },
-                {
-                    type: 'line',
-                    x0: instrumentData.dates[0],
-                    y0: -20,
-                    x1: instrumentData.dates[instrumentData.dates.length - 1],
-                    y1: -20,
-                    yref: 'y',
-                    line: {
-                        color: 'gray',
-                        width: 1,
-                        dash: 'dash'
-                    }
-                },
-                {
-                    type: 'line',
-                    x0: instrumentData.dates[0],
-                    y0: 0,
-                    x1: instrumentData.dates[instrumentData.dates.length - 1],
-                    y1: 0,
-                    yref: 'y',
-                    line: {
-                        color: 'gray',
-                        width: 1
-                    }
-                }
-            );
-
-            layout.shapes = shapes;
-
-            Plotly.newPlot('forecastPlot', traces, layout);
-        }
-
-        // Function to fetch and initialize plot data
-        async function fetchAndPlotData() {
-            const plotDiv = document.getElementById('forecastPlot');
-            
+        // Fetch and process the forecast data
+        async function loadForecastData() {
             try {
-                console.log('Fetching forecast data...');
+                console.log('Attempting to fetch forecast data...');
                 const response = await fetch('https://raw.githubusercontent.com/stevenmichiels/stevenmichiels.github.io/main/forecast_data.json');
+                console.log('Response received:', response);
+                const data = await response.json();
+                console.log('Parsed data:', data);
+                currentData = data;
+                populateTable(data);
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                // Automatically select SPX after loading data
+                if (data.instruments && data.instruments.SPX) {
+                    selectInstrument('SPX');
                 }
-                
-                console.log('Parsing JSON data...');
-                globalData = await response.json();
-                
-                // Populate instrument selector and create initial plot
-                populateInstrumentSelector(globalData);
-                updatePlot();
-
             } catch (error) {
-                console.error('Error fetching or plotting data:', error);
-                plotDiv.innerHTML = `
-                    <div class="error-message">
-                        <h4>Error loading forecast data</h4>
-                        <p>Details: ${error.message}</p>
-                        <p>Please make sure you have run the Python script (XGenerateForecast.py) to generate the forecast data.</p>
-                    </div>`;
+                console.error('Detailed error loading forecast data:', error);
+                document.querySelector('#instrumentTable tbody').innerHTML = 
+                    `<tr><td colspan="2">Error loading data: ${error.message}</td></tr>`;
             }
         }
 
-        // Call the function when the page loads
-        document.addEventListener('DOMContentLoaded', fetchAndPlotData);
+        function populateTable(data) {
+            const tbody = document.querySelector('#instrumentTable tbody');
+            tbody.innerHTML = '';
+
+            Object.entries(data.instruments).forEach(([instrument, instrumentData]) => {
+                const row = document.createElement('tr');
+                const latestForecast = instrumentData.forecasts[instrumentData.forecasts.length - 1];
+                
+                // Determine the appropriate CSS class based on the forecast value
+                let forecastClass = 'forecast-cell ';
+                if (latestForecast <= -10) {
+                    forecastClass += 'forecast-very-negative';
+                } else if (latestForecast < 0) {
+                    forecastClass += 'forecast-negative';
+                } else if (latestForecast >= 10) {
+                    forecastClass += 'forecast-very-positive';
+                } else {
+                    forecastClass += 'forecast-positive';
+                }
+                
+                row.innerHTML = `
+                    <td>${instrument}</td>
+                    <td class="${forecastClass}">${latestForecast.toFixed(1)}</td>
+                `;
+
+                row.addEventListener('click', () => selectInstrument(instrument));
+                tbody.appendChild(row);
+            });
+        }
+
+        function selectInstrument(instrument) {
+            // Update selection styling
+            document.querySelectorAll('#instrumentTable tr').forEach(row => {
+                row.classList.remove('selected-row');
+                if (row.cells[0].textContent === instrument) {
+                    row.classList.add('selected-row');
+                }
+            });
+
+            // Show chart container
+            document.getElementById('chartContainer').style.display = 'block';
+            
+            // Update charts
+            const instrumentData = currentData.instruments[instrument];
+            updateCharts(instrument, instrumentData);
+        }
+
+        function getStartDate(data) {
+            // Find the first non-null price
+            const firstValidIndex = data.prices.findIndex(price => price !== null);
+            if (firstValidIndex === -1) return null;
+
+            const firstDate = new Date(data.dates[firstValidIndex]);
+            const defaultStart = new Date('1962-01-01');
+
+            // If data starts before 1962, use 1962
+            if (firstDate < defaultStart) {
+                return defaultStart;
+            }
+
+            // If data starts mid-year, use start of next year
+            if (firstDate.getMonth() > 0) {  // If not January
+                return new Date(firstDate.getFullYear() + 1, 0, 1);  // Start of next year
+            }
+
+            // Otherwise use start of the first year with data
+            return new Date(firstDate.getFullYear(), 0, 1);
+        }
+
+        function updateCharts(instrument, data) {
+            // Update title
+            document.getElementById('chartTitle').textContent = instrument;
+
+            // Determine start date
+            const startDate = getStartDate(data);
+            if (!startDate) {
+                console.error('No valid data found for', instrument);
+                return;
+            }
+
+            // Filter data from start date
+            const startIndex = data.dates.findIndex(date => new Date(date) >= startDate);
+            const filteredDates = data.dates.slice(startIndex);
+            const filteredPrices = data.prices.slice(startIndex);
+            const filteredForecasts = data.forecasts.slice(startIndex);
+            const endDate = new Date(data.dates[data.dates.length - 1]);
+
+            // Create price chart
+            const priceTrace = {
+                x: filteredDates,
+                y: filteredPrices,
+                type: 'scatter',
+                name: 'Price',
+                line: { color: '#2c3e50' }
+            };
+
+            // Create shapes for background coloring based on forecast values
+            const backgroundShapes = [];
+            let currentSign = Math.sign(filteredForecasts[0]);
+            let shapeStartIndex = 0;
+
+            // Create background shapes for negative forecast periods
+            for (let i = 1; i <= filteredForecasts.length; i++) {
+                const newSign = i < filteredForecasts.length ? Math.sign(filteredForecasts[i]) : null;
+                
+                if (newSign !== currentSign || i === filteredForecasts.length) {
+                    if (currentSign < 0) {
+                        backgroundShapes.push({
+                            type: 'rect',
+                            x0: filteredDates[shapeStartIndex],
+                            x1: filteredDates[i - 1],
+                            y0: Math.min(...filteredPrices) * 0.9,  // Extend below lowest price
+                            y1: Math.max(...filteredPrices) * 1.1,  // Extend above highest price
+                            fillcolor: 'rgba(231, 76, 60, 0.2)',  // Made red deeper
+                            line: { width: 0 },
+                            layer: 'below'
+                        });
+                    }
+                    shapeStartIndex = i;
+                    currentSign = newSign;
+                }
+            }
+
+            const priceLayout = {
+                xaxis: {
+                    rangeslider: { visible: false },
+                    type: 'date',
+                    range: [startDate, endDate]
+                },
+                yaxis: { 
+                    title: {
+                        text: 'Price',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    fixedrange: false
+                },
+                height: 400,
+                margin: { t: 40, b: 20 },
+                shapes: backgroundShapes
+            };
+
+            // Create forecast chart with a single black line and background shading
+            const forecastTrace = {
+                x: filteredDates,
+                y: filteredForecasts,
+                type: 'scatter',
+                name: 'Forecast',
+                line: { color: '#808080' },  // Changed to gray
+                showlegend: false
+            };
+
+            // Create background shapes for negative forecast periods in the forecast chart
+            const forecastBackgroundShapes = [];
+            let forecastCurrentSign = Math.sign(filteredForecasts[0]);
+            let forecastShapeStartIndex = 0;
+
+            // Create background shapes for negative forecast periods
+            for (let i = 1; i <= filteredForecasts.length; i++) {
+                const newSign = i < filteredForecasts.length ? Math.sign(filteredForecasts[i]) : null;
+                
+                if (newSign !== forecastCurrentSign || i === filteredForecasts.length) {
+                    if (forecastCurrentSign < 0) {
+                        forecastBackgroundShapes.push({
+                            type: 'rect',
+                            x0: filteredDates[forecastShapeStartIndex],
+                            x1: filteredDates[i - 1],
+                            y0: -22,  // Match the yaxis range
+                            y1: 22,   // Match the yaxis range
+                            fillcolor: 'rgba(231, 76, 60, 0.2)',  // Made red deeper
+                            line: { width: 0 },
+                            layer: 'below'
+                        });
+                    }
+                    forecastShapeStartIndex = i;
+                    forecastCurrentSign = newSign;
+                }
+            }
+
+            // Add zero line to shapes
+            forecastBackgroundShapes.push({
+                type: 'line',
+                x0: startDate,
+                x1: endDate,
+                y0: 0,
+                y1: 0,
+                line: {
+                    color: 'gray',
+                    width: 1,
+                    dash: 'dash'
+                }
+            });
+
+            const forecastLayout = {
+                xaxis: {
+                    rangeslider: { visible: true },
+                    type: 'date',
+                    range: [startDate, endDate]
+                },
+                yaxis: {
+                    title: {
+                        text: 'Trend signal',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    range: [-22, 22],
+                    fixedrange: true
+                },
+                height: 300,
+                margin: { t: 40, b: 100 },
+                shapes: forecastBackgroundShapes
+            };
+
+            // Add configuration options for better interactivity
+            const config = {
+                responsive: true,
+                displayModeBar: true,
+                modeBarButtonsToAdd: ['drawline', 'drawopenpath', 'eraseshape'],
+                modeBarButtonsToRemove: ['lasso2d', 'select2d']
+            };
+
+            // Create new plots with full range
+            Plotly.newPlot('priceChart', [priceTrace], priceLayout, config);
+            Plotly.newPlot('forecastChart', [forecastTrace], forecastLayout, config);
+
+            // Remove any existing event listeners
+            const priceChart = document.getElementById('priceChart');
+            const forecastChart = document.getElementById('forecastChart');
+            if (priceChart.on) priceChart.removeAllListeners('plotly_relayout');
+            if (forecastChart.on) forecastChart.removeAllListeners('plotly_relayout');
+
+            // Debounce function to limit update frequency
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Function to update chart range
+            function updateChartRange(sourceId, targetId, eventdata) {
+                // Only update if it's a range change
+                if (eventdata['xaxis.range[0]'] || eventdata['xaxis.range[1]'] || eventdata['xaxis.range']) {
+                    const update = {
+                        'xaxis.range': eventdata['xaxis.range'] || [eventdata['xaxis.range[0]'], eventdata['xaxis.range[1]']]
+                    };
+                    Plotly.relayout(targetId, update);
+                }
+            }
+
+            // Debounced update functions
+            const debouncedUpdateForecast = debounce((eventdata) => {
+                updateChartRange('priceChart', 'forecastChart', eventdata);
+            }, 100);
+
+            const debouncedUpdatePrice = debounce((eventdata) => {
+                updateChartRange('forecastChart', 'priceChart', eventdata);
+            }, 100);
+
+            // Add new event listeners
+            priceChart.on('plotly_relayout', debouncedUpdateForecast);
+            forecastChart.on('plotly_relayout', debouncedUpdatePrice);
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadForecastData);
     </script>
 </body>
 </html>
