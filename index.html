@@ -139,7 +139,7 @@
 </head>
 <body>
     <div class="header">
-        <h1><img src="favicon.ico" alt="Icon" style="height: 28px; vertical-align: middle; margin-right: 10px;">Market Trend Signals</h1>
+        <h1><img src="favicon.ico" alt="Icon" style="height: 32px; vertical-align: middle; margin-right: 10px;">Market Trend Signals</h1>
     </div>
     <div class="container">
         <div class="table-container">
@@ -287,8 +287,11 @@
                 name: 'Price',
                 line: { color: '#2c3e50' },
                 hovertemplate: '%{x|%b %d, %Y}<br>' +
-                             '<b>Price:</b> $%{y:.1f}<br>' +
-                             '<b>Trend:</b> %{customdata:.1f}<extra></extra>'
+                             '<b>Trend:</b> %{customdata:.1f}<extra></extra>',
+                hoverlabel: {
+                    bgcolor: 'white',
+                    font: { color: 'black' }
+                }
             };
 
             // Add customdata to price trace for showing forecast values
@@ -326,8 +329,12 @@
                     rangeslider: { visible: false },
                     type: 'date',
                     range: [defaultStartDate, endDate],
-                    showspikes: false,  // Removes the vertical hover line
-                    hoverformat: ''     // Removes the date hover at bottom
+                    showspikes: true,
+                    spikemode: 'across',
+                    spikesnap: 'cursor',
+                    showline: true,
+                    spikedash: 'dash',
+                    spikethickness: 1
                 },
                 yaxis: { 
                     title: {
@@ -337,12 +344,18 @@
                             weight: 'bold'
                         }
                     },
-                    fixedrange: false
+                    fixedrange: false,
+                    showspikes: true,
+                    spikemode: 'across',
+                    spikesnap: 'cursor',
+                    showline: true,
+                    spikedash: 'dash',
+                    spikethickness: 1
                 },
                 height: 400,
                 margin: { t: 40, b: 20 },
                 shapes: backgroundShapes,
-                hovermode: 'y unified',
+                hovermode: 'x unified',
                 hoverdistance: -1
             };
 
@@ -408,8 +421,12 @@
                     rangeslider: { visible: true },
                     type: 'date',
                     range: [defaultStartDate, endDate],
-                    showspikes: false,  // Removes the vertical hover line
-                    hoverformat: ''     // Removes the date hover at bottom
+                    showspikes: true,
+                    spikemode: 'across',
+                    spikesnap: 'cursor',
+                    showline: true,
+                    spikedash: 'dash',
+                    spikethickness: 1
                 },
                 yaxis: {
                     title: {
@@ -420,12 +437,18 @@
                         }
                     },
                     range: [-22, 22],
-                    fixedrange: true
+                    fixedrange: true,
+                    showspikes: true,
+                    spikemode: 'across',
+                    spikesnap: 'cursor',
+                    showline: true,
+                    spikedash: 'dash',
+                    spikethickness: 1
                 },
                 height: 300,
                 margin: { t: 40, b: 100 },
                 shapes: forecastBackgroundShapes,
-                hovermode: 'y unified',
+                hovermode: 'x unified',
                 hoverdistance: -1
             };
 
