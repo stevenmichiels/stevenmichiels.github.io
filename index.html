@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Trend Forecast</title>
+    <title>Market Trend Signals</title>
     <!-- Include Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
@@ -139,7 +139,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>Trend Signals</h1>
+        <h1>Market Trend Signals</h1>
     </div>
     <div class="container">
         <div class="table-container">
@@ -287,7 +287,7 @@
                 name: 'Price',
                 line: { color: '#2c3e50' },
                 hovertemplate: '<b>Date:</b> %{x|%Y-%m-%d}<br>' +
-                             '<b>Price:</b> $%{y:.1f}<br>' +
+                             '<b>Price:</b> $ %{y:.1f}<br>' +
                              '<b>Trend:</b> %{customdata:.1f}<extra></extra>'
             };
 
