@@ -147,7 +147,7 @@
                 <thead>
                     <tr>
                         <th>Instrument</th>
-                        <th>Forecast</th>
+                        <th>Trend signal</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -274,6 +274,10 @@
             const filteredPrices = data.prices.slice(startIndex);
             const filteredForecasts = data.forecasts.slice(startIndex);
             const endDate = new Date(data.dates[data.dates.length - 1]);
+            
+            // Calculate default view range (3 years back from latest date)
+            const defaultStartDate = new Date(endDate);
+            defaultStartDate.setFullYear(defaultStartDate.getFullYear() - 3);
 
             // Create price chart
             const priceTrace = {
@@ -315,7 +319,7 @@
                 xaxis: {
                     rangeslider: { visible: false },
                     type: 'date',
-                    range: [startDate, endDate]
+                    range: [defaultStartDate, endDate]
                 },
                 yaxis: { 
                     title: {
@@ -372,7 +376,7 @@
             // Add zero line to shapes
             forecastBackgroundShapes.push({
                 type: 'line',
-                x0: startDate,
+                x0: defaultStartDate,
                 x1: endDate,
                 y0: 0,
                 y1: 0,
@@ -387,11 +391,11 @@
                 xaxis: {
                     rangeslider: { visible: true },
                     type: 'date',
-                    range: [startDate, endDate]
+                    range: [defaultStartDate, endDate]
                 },
                 yaxis: {
                     title: {
-                        text: 'Trend signal',
+                        text: 'Trend',
                         font: {
                             size: 16,
                             weight: 'bold'
