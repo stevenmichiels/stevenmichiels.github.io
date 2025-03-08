@@ -283,15 +283,31 @@
             const ema32 = calculateEMA(filteredPrices, 32);
             const ema128 = calculateEMA(filteredPrices, 128);
             
-            // Create color arrays for EMA128 based on EMA32 position
-            const ema128Colors = [];
+            // Create separate arrays for green and red EMA segments
+            const greenDates = [];
+            const greenEma = [];
+            const redDates = [];
+            const redEma = [];
+            
             for (let i = 0; i < filteredDates.length; i++) {
-                if (i < 128 || ema32[i] === null || ema128[i] === null) {
-                    ema128Colors.push(null); // Skip early points where EMA is not calculated
-                } else if (ema32[i] > ema128[i]) {
-                    ema128Colors.push('green');
-                } else {
-                    ema128Colors.push('red');
+                if (i >= 128 && ema32[i] !== null && ema128[i] !== null) {
+                    if (ema32[i] > ema128[i]) {
+                        greenDates.push(filteredDates[i]);
+                        greenEma.push(ema128[i]);
+                        // Add null to red arrays to create a gap
+                        if (redDates.length > 0 && redDates[redDates.length-1] !== null) {
+                            redDates.push(filteredDates[i]);
+                            redEma.push(null);
+                        }
+                    } else {
+                        redDates.push(filteredDates[i]);
+                        redEma.push(ema128[i]);
+                        // Add null to green arrays to create a gap
+                        if (greenDates.length > 0 && greenDates[greenDates.length-1] !== null) {
+                            greenDates.push(filteredDates[i]);
+                            greenEma.push(null);
+                        }
+                    }
                 }
             }
 
@@ -312,25 +328,23 @@
             // Add customdata to price trace for showing forecast values
             priceTrace.customdata = filteredForecasts;
 
-            // Create EMA128 traces (one for green, one for red)
+            // Create EMA traces
             const ema128GreenTrace = {
-                x: filteredDates,
-                y: ema128,
+                x: greenDates,
+                y: greenEma,
                 type: 'scatter',
                 name: '128-day EMA (Bullish)',
                 line: { color: 'green', width: 2 },
-                hoverinfo: 'none',
-                visible: 'legendonly'
+                hoverinfo: 'none'
             };
             
             const ema128RedTrace = {
-                x: filteredDates,
-                y: ema128,
+                x: redDates,
+                y: redEma,
                 type: 'scatter',
                 name: '128-day EMA (Bearish)',
                 line: { color: 'red', width: 2 },
-                hoverinfo: 'none',
-                visible: 'legendonly'
+                hoverinfo: 'none'
             };
 
             // Create shapes for background coloring based on forecast values
