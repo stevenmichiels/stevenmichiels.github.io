@@ -279,38 +279,6 @@
             const defaultStartDate = new Date(endDate);
             defaultStartDate.setFullYear(defaultStartDate.getFullYear() - 3);
 
-            // Calculate EMAs
-            const ema32 = calculateEMA(filteredPrices, 32);
-            const ema128 = calculateEMA(filteredPrices, 128);
-            
-            // Create separate arrays for green and red EMA segments
-            const greenDates = [];
-            const greenEma = [];
-            const redDates = [];
-            const redEma = [];
-            
-            for (let i = 0; i < filteredDates.length; i++) {
-                if (i >= 128 && ema32[i] !== null && ema128[i] !== null) {
-                    if (ema32[i] > ema128[i]) {
-                        greenDates.push(filteredDates[i]);
-                        greenEma.push(ema128[i]);
-                        // Add null to red arrays to create a gap
-                        if (redDates.length > 0 && redDates[redDates.length-1] !== null) {
-                            redDates.push(filteredDates[i]);
-                            redEma.push(null);
-                        }
-                    } else {
-                        redDates.push(filteredDates[i]);
-                        redEma.push(ema128[i]);
-                        // Add null to green arrays to create a gap
-                        if (greenDates.length > 0 && greenDates[greenDates.length-1] !== null) {
-                            greenDates.push(filteredDates[i]);
-                            greenEma.push(null);
-                        }
-                    }
-                }
-            }
-
             // Create separate arrays for positive and negative forecast price segments
             const positiveDates = [];
             const positivePrices = [];
@@ -345,6 +313,7 @@
                 name: 'Price (Positive Forecast)',
                 line: { color: 'green', width: 2 },
                 hoverinfo: 'none',
+                showlegend: false,
                 hoverlabel: {
                     bgcolor: 'white',
                     font: { color: 'black' }
@@ -359,30 +328,12 @@
                 name: 'Price (Negative Forecast)',
                 line: { color: 'red', width: 2 },
                 hoverinfo: 'none',
+                showlegend: false,
                 hoverlabel: {
                     bgcolor: 'white',
                     font: { color: 'black' }
                 },
                 customdata: filteredForecasts.filter((_, i) => filteredForecasts[i] < 0)
-            };
-
-            // Create EMA traces
-            const ema128GreenTrace = {
-                x: greenDates,
-                y: greenEma,
-                type: 'scatter',
-                name: '128-day EMA (Bullish)',
-                line: { color: 'green', width: 2 },
-                hoverinfo: 'none'
-            };
-            
-            const ema128RedTrace = {
-                x: redDates,
-                y: redEma,
-                type: 'scatter',
-                name: '128-day EMA (Bearish)',
-                line: { color: 'red', width: 2 },
-                hoverinfo: 'none'
             };
 
             // Create shapes for background coloring based on forecast values
@@ -441,17 +392,11 @@
                     spikethickness: 1
                 },
                 height: 400,
-                margin: { t: 40, b: 80 },
+                margin: { t: 40, b: 40 },
                 shapes: backgroundShapes,
                 hovermode: 'x',
                 hoverdistance: -1,
-                legend: {
-                    orientation: 'h',
-                    y: -0.15,
-                    yanchor: 'top',
-                    x: 0.5,
-                    xanchor: 'center'
-                }
+                showlegend: false
             };
 
             // Create forecast chart with a single black line and background shading
@@ -555,7 +500,7 @@
             };
 
             // Create new plots with full range
-            Plotly.newPlot('priceChart', [positivePriceTrace, negativePriceTrace, ema128GreenTrace, ema128RedTrace], priceLayout, config);
+            Plotly.newPlot('priceChart', [positivePriceTrace, negativePriceTrace], priceLayout, config);
             Plotly.newPlot('forecastChart', [forecastTrace], forecastLayout, config);
 
             // Add custom hover events
@@ -704,53 +649,6 @@
             // Add new event listeners
             priceChart.on('plotly_relayout', debouncedUpdateForecast);
             forecastChart.on('plotly_relayout', debouncedUpdatePrice);
-        }
-
-        // Function to calculate Exponential Moving Average
-        function calculateEMA(prices, period) {
-            const ema = [];
-            const k = 2 / (period + 1);
-            
-            // Initialize with SMA for first period points
-            let sum = 0;
-            let validPoints = 0;
-            
-            for (let i = 0; i < period && i < prices.length; i++) {
-                if (prices[i] !== null) {
-                    sum += prices[i];
-                    validPoints++;
-                }
-            }
-            
-            // Not enough valid points for initial SMA
-            if (validPoints === 0) {
-                for (let i = 0; i < prices.length; i++) {
-                    ema.push(null);
-                }
-                return ema;
-            }
-            
-            const firstEma = sum / validPoints;
-            
-            // Fill in null values for the first period-1 points
-            for (let i = 0; i < period - 1; i++) {
-                ema.push(null);
-            }
-            
-            // Add the first EMA value
-            ema.push(firstEma);
-            
-            // Calculate EMA for remaining points
-            for (let i = period; i < prices.length; i++) {
-                if (prices[i] === null) {
-                    ema.push(ema[i-1]); // Use previous EMA if price is null
-                } else {
-                    const newEma = prices[i] * k + ema[i-1] * (1 - k);
-                    ema.push(newEma);
-                }
-            }
-            
-            return ema;
         }
 
         // Load data when page loads
