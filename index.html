@@ -279,6 +279,22 @@
             const defaultStartDate = new Date(endDate);
             defaultStartDate.setFullYear(defaultStartDate.getFullYear() - 3);
 
+            // Calculate EMAs
+            const ema32 = calculateEMA(filteredPrices, 32);
+            const ema128 = calculateEMA(filteredPrices, 128);
+            
+            // Create color arrays for EMA128 based on EMA32 position
+            const ema128Colors = [];
+            for (let i = 0; i < filteredDates.length; i++) {
+                if (i < 128 || ema32[i] === null || ema128[i] === null) {
+                    ema128Colors.push(null); // Skip early points where EMA is not calculated
+                } else if (ema32[i] > ema128[i]) {
+                    ema128Colors.push('green');
+                } else {
+                    ema128Colors.push('red');
+                }
+            }
+
             // Create price chart
             const priceTrace = {
                 x: filteredDates,
@@ -295,6 +311,27 @@
 
             // Add customdata to price trace for showing forecast values
             priceTrace.customdata = filteredForecasts;
+
+            // Create EMA128 traces (one for green, one for red)
+            const ema128GreenTrace = {
+                x: filteredDates,
+                y: ema128,
+                type: 'scatter',
+                name: '128-day EMA (Bullish)',
+                line: { color: 'green', width: 2 },
+                hoverinfo: 'none',
+                visible: 'legendonly'
+            };
+            
+            const ema128RedTrace = {
+                x: filteredDates,
+                y: ema128,
+                type: 'scatter',
+                name: '128-day EMA (Bearish)',
+                line: { color: 'red', width: 2 },
+                hoverinfo: 'none',
+                visible: 'legendonly'
+            };
 
             // Create shapes for background coloring based on forecast values
             const backgroundShapes = [];
@@ -459,7 +496,7 @@
             };
 
             // Create new plots with full range
-            Plotly.newPlot('priceChart', [priceTrace], priceLayout, config);
+            Plotly.newPlot('priceChart', [priceTrace, ema128GreenTrace, ema128RedTrace], priceLayout, config);
             Plotly.newPlot('forecastChart', [forecastTrace], forecastLayout, config);
 
             // Add custom hover events
@@ -594,6 +631,53 @@
             // Add new event listeners
             priceChart.on('plotly_relayout', debouncedUpdateForecast);
             forecastChart.on('plotly_relayout', debouncedUpdatePrice);
+        }
+
+        // Function to calculate Exponential Moving Average
+        function calculateEMA(prices, period) {
+            const ema = [];
+            const k = 2 / (period + 1);
+            
+            // Initialize with SMA for first period points
+            let sum = 0;
+            let validPoints = 0;
+            
+            for (let i = 0; i < period && i < prices.length; i++) {
+                if (prices[i] !== null) {
+                    sum += prices[i];
+                    validPoints++;
+                }
+            }
+            
+            // Not enough valid points for initial SMA
+            if (validPoints === 0) {
+                for (let i = 0; i < prices.length; i++) {
+                    ema.push(null);
+                }
+                return ema;
+            }
+            
+            const firstEma = sum / validPoints;
+            
+            // Fill in null values for the first period-1 points
+            for (let i = 0; i < period - 1; i++) {
+                ema.push(null);
+            }
+            
+            // Add the first EMA value
+            ema.push(firstEma);
+            
+            // Calculate EMA for remaining points
+            for (let i = period; i < prices.length; i++) {
+                if (prices[i] === null) {
+                    ema.push(ema[i-1]); // Use previous EMA if price is null
+                } else {
+                    const newEma = prices[i] * k + ema[i-1] * (1 - k);
+                    ema.push(newEma);
+                }
+            }
+            
+            return ema;
         }
 
         // Load data when page loads
