@@ -286,8 +286,7 @@
                 type: 'scatter',
                 name: 'Price',
                 line: { color: '#2c3e50' },
-                hovertemplate: '$%{y:.1f}<br>' +
-                             'Trend: %{customdata:.1f}<extra></extra>',
+                hoverinfo: 'none',
                 hoverlabel: {
                     bgcolor: 'white',
                     font: { color: 'black' }
@@ -334,8 +333,7 @@
                     spikesnap: 'cursor',
                     showline: true,
                     spikedash: 'dash',
-                    spikethickness: 1,
-                    hoverformat: ''
+                    spikethickness: 1
                 },
                 yaxis: { 
                     title: {
@@ -356,7 +354,7 @@
                 height: 400,
                 margin: { t: 40, b: 20 },
                 shapes: backgroundShapes,
-                hovermode: 'x unified',
+                hovermode: 'x',
                 hoverdistance: -1
             };
 
@@ -368,7 +366,7 @@
                 name: 'Forecast',
                 line: { color: '#808080' },
                 showlegend: false,
-                hovertemplate: 'Trend: %{y:.1f}<extra></extra>',
+                hoverinfo: 'none',
                 hoverlabel: {
                     font: { color: 'black' },
                     bgcolor: 'white'
@@ -426,8 +424,7 @@
                     spikesnap: 'cursor',
                     showline: true,
                     spikedash: 'dash',
-                    spikethickness: 1,
-                    hoverformat: ''
+                    spikethickness: 1
                 },
                 yaxis: {
                     title: {
@@ -449,7 +446,7 @@
                 height: 300,
                 margin: { t: 40, b: 100 },
                 shapes: forecastBackgroundShapes,
-                hovermode: 'x unified',
+                hovermode: 'x',
                 hoverdistance: -1
             };
 
@@ -464,6 +461,74 @@
             // Create new plots with full range
             Plotly.newPlot('priceChart', [priceTrace], priceLayout, config);
             Plotly.newPlot('forecastChart', [forecastTrace], forecastLayout, config);
+
+            // Add custom hover events
+            document.getElementById('priceChart').on('plotly_hover', function(data) {
+                if (data.points.length > 0) {
+                    const point = data.points[0];
+                    const date = new Date(point.x);
+                    const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    const price = point.y.toFixed(1);
+                    const trend = point.customdata.toFixed(1);
+                    
+                    const hoverInfo = document.createElement('div');
+                    hoverInfo.style.backgroundColor = 'white';
+                    hoverInfo.style.padding = '8px';
+                    hoverInfo.style.border = '1px solid #ddd';
+                    hoverInfo.style.borderRadius = '4px';
+                    hoverInfo.style.position = 'absolute';
+                    hoverInfo.style.left = (point.xaxis.d2p(point.x) + 10) + 'px';
+                    hoverInfo.style.top = (point.yaxis.d2p(point.y) - 40) + 'px';
+                    hoverInfo.style.zIndex = 1000;
+                    hoverInfo.style.pointerEvents = 'none';
+                    hoverInfo.innerHTML = `${formattedDate}<br>$${price}<br>Trend: ${trend}`;
+                    
+                    // Remove any existing hover info
+                    const existingInfo = document.querySelector('.custom-hover-info');
+                    if (existingInfo) existingInfo.remove();
+                    
+                    hoverInfo.className = 'custom-hover-info';
+                    document.body.appendChild(hoverInfo);
+                }
+            });
+            
+            document.getElementById('forecastChart').on('plotly_hover', function(data) {
+                if (data.points.length > 0) {
+                    const point = data.points[0];
+                    const date = new Date(point.x);
+                    const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    const trend = point.y.toFixed(1);
+                    
+                    const hoverInfo = document.createElement('div');
+                    hoverInfo.style.backgroundColor = 'white';
+                    hoverInfo.style.padding = '8px';
+                    hoverInfo.style.border = '1px solid #ddd';
+                    hoverInfo.style.borderRadius = '4px';
+                    hoverInfo.style.position = 'absolute';
+                    hoverInfo.style.left = (point.xaxis.d2p(point.x) + 10) + 'px';
+                    hoverInfo.style.top = (point.yaxis.d2p(point.y) - 40) + 'px';
+                    hoverInfo.style.zIndex = 1000;
+                    hoverInfo.style.pointerEvents = 'none';
+                    hoverInfo.innerHTML = `${formattedDate}<br>Trend: ${trend}`;
+                    
+                    // Remove any existing hover info
+                    const existingInfo = document.querySelector('.custom-hover-info');
+                    if (existingInfo) existingInfo.remove();
+                    
+                    hoverInfo.className = 'custom-hover-info';
+                    document.body.appendChild(hoverInfo);
+                }
+            });
+            
+            document.getElementById('priceChart').on('plotly_unhover', function() {
+                const existingInfo = document.querySelector('.custom-hover-info');
+                if (existingInfo) existingInfo.remove();
+            });
+            
+            document.getElementById('forecastChart').on('plotly_unhover', function() {
+                const existingInfo = document.querySelector('.custom-hover-info');
+                if (existingInfo) existingInfo.remove();
+            });
 
             // Remove any existing event listeners
             const priceChart = document.getElementById('priceChart');
