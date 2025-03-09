@@ -139,7 +139,7 @@
 </head>
 <body>
     <div class="header">
-        <h1><img src="favicon.ico" alt="Icon" style="height: 80px; vertical-align: middle; margin-right: 25px;">Market Trend Signals (Local)</h1>
+        <h1><img src="favicon.ico" alt="Icon" style="height: 85px; vertical-align: middle; margin-right: 40px;">Market Trend Signals (Local)</h1>
     </div>
     <div class="container">
         <div class="table-container">
@@ -208,10 +208,10 @@
                     forecastClass += 'forecast-positive';
                 }
                 
-                // Format the forecast value with a + sign for positive values
+                // Format the forecast value without a plus sign for positive values
                 const formattedForecast = latestForecast >= 0 ? 
-                    `+ ${latestForecast.toFixed(1)}` : 
-                    `- ${Math.abs(latestForecast).toFixed(1)}`;
+                    `${latestForecast.toFixed(1)}` : 
+                    `${latestForecast.toFixed(1)}`;
                 
                 row.innerHTML = `
                     <td>${instrument}</td>
