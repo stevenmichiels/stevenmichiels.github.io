@@ -205,7 +205,7 @@
                 const ema4 = calculateEMA(recentForecasts, 4);
                 
                 // Determine arrow direction based on EMAs
-                const arrowDirection = ema2[ema2.length - 1] >= ema4[ema4.length - 1] ? '↑' : '↓';
+                const arrowDirection = ema2[ema2.length - 1] >= ema4[ema4.length - 1] ? '↗' : '↘';
                 
                 // Determine the appropriate CSS class based on the forecast value
                 let forecastClass = 'forecast-cell ';
