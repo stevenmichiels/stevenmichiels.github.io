@@ -147,7 +147,7 @@
                 <thead>
                     <tr>
                         <th>Instrument</th>
-                        <th>Trend signal</th>
+                        <th>Trend</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -208,9 +208,14 @@
                     forecastClass += 'forecast-positive';
                 }
                 
+                // Format the forecast value with a + sign for positive values
+                const formattedForecast = latestForecast >= 0 ? 
+                    `+${latestForecast.toFixed(1)}` : 
+                    latestForecast.toFixed(1);
+                
                 row.innerHTML = `
                     <td>${instrument}</td>
-                    <td class="${forecastClass}">${latestForecast.toFixed(1)}</td>
+                    <td class="${forecastClass}">${formattedForecast}</td>
                 `;
 
                 row.addEventListener('click', () => selectInstrument(instrument));
