@@ -206,7 +206,6 @@
                 
                 // Determine arrow direction based on EMAs
                 const arrowDirection = ema2[ema2.length - 1] >= ema4[ema4.length - 1] ? '↑' : '↓';
-                const arrowColor = ema2[ema2.length - 1] >= ema4[ema4.length - 1] ? 'green' : 'red';
                 
                 // Determine the appropriate CSS class based on the forecast value
                 let forecastClass = 'forecast-cell ';
@@ -227,7 +226,7 @@
                 
                 row.innerHTML = `
                     <td>${instrument}</td>
-                    <td class="${forecastClass}">${formattedForecast} <span style="color:${arrowColor}; font-weight:bold;">${arrowDirection}</span></td>
+                    <td class="${forecastClass}">${formattedForecast} <span style="font-weight:bold;">${arrowDirection}</span></td>
                 `;
 
                 row.addEventListener('click', () => selectInstrument(instrument));
