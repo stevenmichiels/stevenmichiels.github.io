@@ -196,6 +196,18 @@
                 const row = document.createElement('tr');
                 const latestForecast = instrumentData.forecasts[instrumentData.forecasts.length - 1];
                 
+                // Calculate EMAs for direction arrow
+                const forecasts = instrumentData.forecasts;
+                const recentForecasts = forecasts.slice(-5); // Get last 5 forecasts for EMA calculation
+                
+                // Calculate 2-day and 4-day EMAs
+                const ema2 = calculateEMA(recentForecasts, 2);
+                const ema4 = calculateEMA(recentForecasts, 4);
+                
+                // Determine arrow direction based on EMAs
+                const arrowDirection = ema2[ema2.length - 1] >= ema4[ema4.length - 1] ? '↑' : '↓';
+                const arrowColor = ema2[ema2.length - 1] >= ema4[ema4.length - 1] ? 'green' : 'red';
+                
                 // Determine the appropriate CSS class based on the forecast value
                 let forecastClass = 'forecast-cell ';
                 if (latestForecast <= -10) {
@@ -215,12 +227,59 @@
                 
                 row.innerHTML = `
                     <td>${instrument}</td>
-                    <td class="${forecastClass}">${formattedForecast}</td>
+                    <td class="${forecastClass}">${formattedForecast} <span style="color:${arrowColor}; font-weight:bold;">${arrowDirection}</span></td>
                 `;
 
                 row.addEventListener('click', () => selectInstrument(instrument));
                 tbody.appendChild(row);
             });
+        }
+
+        // Function to calculate Exponential Moving Average
+        function calculateEMA(values, period) {
+            const ema = [];
+            const k = 2 / (period + 1);
+            
+            // Initialize with SMA for first period points
+            let sum = 0;
+            let validPoints = 0;
+            
+            for (let i = 0; i < period && i < values.length; i++) {
+                if (values[i] !== null) {
+                    sum += values[i];
+                    validPoints++;
+                }
+            }
+            
+            // Not enough valid points for initial SMA
+            if (validPoints === 0) {
+                for (let i = 0; i < values.length; i++) {
+                    ema.push(null);
+                }
+                return ema;
+            }
+            
+            const firstEma = sum / validPoints;
+            
+            // Fill in null values for the first period-1 points
+            for (let i = 0; i < period - 1; i++) {
+                ema.push(null);
+            }
+            
+            // Add the first EMA value
+            ema.push(firstEma);
+            
+            // Calculate EMA for remaining points
+            for (let i = period; i < values.length; i++) {
+                if (values[i] === null) {
+                    ema.push(ema[i-1]); // Use previous EMA if value is null
+                } else {
+                    const newEma = values[i] * k + ema[i-1] * (1 - k);
+                    ema.push(newEma);
+                }
+            }
+            
+            return ema;
         }
 
         function selectInstrument(instrument) {
